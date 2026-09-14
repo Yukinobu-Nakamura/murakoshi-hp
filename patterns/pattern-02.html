@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>村越じゅんた 公式サイト｜府中に、むちゅう。｜Corporate Navy</title>
+<meta name="description" content="村越じゅんた(むらこし じゅんた)公式サイト。交通コンサルタント20年。府中のまちで、毎週の清掃活動と子ども・若者への支援を続けています。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="村越じゅんた 公式サイト｜府中に、むちゅう。">
+<meta property="og:description" content="交通コンサルタント20年。府中のまちで、毎週の清掃活動と子ども・若者への支援を続けています。">
+<meta property="og:image" content="../assets/img/ogp.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/img/favicon-64.png" type="image/png">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;600;700;900&family=Noto+Sans+JP:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-deep:#0d2340;
+  --navy:#123a63;
+  --navy-black:#081729;
+  --gold:#c9a227;
+  --gold-deep:#a5811a;
+  --gold-soft:#e6cf87;
+  --paper:#ffffff;
+  --paper-soft:#f6f4ee;
+  --ink:#1c2530;
+  --ink-soft:#5b6672;
+  --line:#dcd6c6;
+  --maxw:1140px;
+  --topbar-h:40px;
+  --header-h:88px;
+  --header-h-sm:64px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:"Noto Sans JP",sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.9;
+  font-size:15px;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+ul,ol{list-style:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+h1,h2,h3{font-family:"Noto Serif JP",serif;}
+[id]{scroll-margin-top:84px;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px;}
+.wrap--wide{max-width:1280px;}
+section{padding:120px 0;}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;}
+  html{scroll-behavior:auto;}
+}
+
+/* ---------- shared ---------- */
+.eyebrow{
+  display:flex;align-items:center;gap:16px;
+  font-family:"EB Garamond",serif;font-size:.84rem;letter-spacing:.34em;
+  color:var(--gold-deep);text-transform:uppercase;margin-bottom:20px;
+}
+.eyebrow::before{content:"";width:40px;height:1px;background:var(--gold);}
+.eyebrow--light{color:var(--gold-soft);}
+.eyebrow--light::before{background:var(--gold-soft);}
+.sec-head h2{font-size:clamp(1.7rem,3vw,2.15rem);color:var(--navy-deep);letter-spacing:.05em;font-weight:700;line-height:1.5;margin-bottom:16px;}
+.sec-head h2.light{color:#fff;}
+.sec-head p.lead{color:var(--ink-soft);font-size:.98rem;max-width:640px;}
+.sec-head p.lead.light{color:rgba(255,255,255,.68);}
+.sec-head--center{text-align:center;}
+.sec-head--center .eyebrow{justify-content:center;}
+.sec-head--center p.lead{margin:0 auto;}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  height:52px;padding:0 40px;font-size:.92rem;letter-spacing:.1em;
+  border:1px solid transparent;border-radius:2px;transition:.3s;font-weight:600;
+}
+.btn-gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep);}
+.btn-gold:hover{background:#fff;border-color:#fff;color:var(--navy-deep);}
+.btn-ghost{background:transparent;border-color:rgba(255,255,255,.5);color:#fff;}
+.btn-ghost:hover{background:#fff;border-color:#fff;color:var(--navy-deep);}
+.btn-navy{background:var(--navy-deep);border-color:var(--navy-deep);color:#fff;}
+.btn-navy:hover{background:var(--gold);border-color:var(--gold);color:var(--navy-deep);}
+@media (max-width:480px){.btn{height:48px;padding:0 30px;font-size:.86rem;}}
+
+/* ---------- utility bar ---------- */
+.topbar{
+  position:fixed;top:0;left:0;right:0;height:var(--topbar-h);z-index:1001;
+  background:var(--navy-black);transition:transform .3s ease;
+}
+.topbar.hide{transform:translateY(-100%);}
+.topbar-inner{
+  max-width:1280px;margin:0 auto;padding:0 40px;height:100%;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+}
+.topbar-tag{
+  font-family:"EB Garamond",serif;font-size:.78rem;letter-spacing:.14em;color:rgba(255,255,255,.68);
+  display:flex;align-items:center;gap:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.topbar-tag b{color:var(--gold-soft);font-weight:500;}
+.topbar-sns{display:flex;align-items:center;gap:14px;flex-shrink:0;}
+.topbar-sns a{color:rgba(255,255,255,.6);display:flex;transition:color .2s ease;}
+.topbar-sns a:hover{color:var(--gold-soft);}
+.topbar-sns svg{width:13px;height:13px;fill:currentColor;}
+@media (max-width:700px){.topbar-tag{font-size:.68rem;}}
+@media (max-width:520px){.topbar-tag span.full{display:none;}}
+
+/* ---------- header ---------- */
+header{
+  position:fixed;top:var(--topbar-h);left:0;right:0;z-index:1000;
+  background:transparent;border-bottom:1px solid transparent;
+  transition:background .35s ease,border-color .35s ease,top .3s ease;
+}
+header.scrolled{
+  top:0;background:rgba(13,35,64,.94);border-bottom:1px solid rgba(255,255,255,.14);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+}
+.nav-inner{
+  max-width:1280px;margin:0 auto;padding:0 40px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:var(--header-h);transition:height .3s ease;
+}
+header.scrolled .nav-inner{height:var(--header-h-sm);}
+.logo{font-family:"Noto Serif JP",serif;font-size:1.34rem;font-weight:700;color:#fff;letter-spacing:.1em;line-height:1.2;}
+.logo span{color:var(--gold-soft);}
+.logo small{display:block;font-family:"EB Garamond",serif;font-weight:500;font-size:.58rem;letter-spacing:.32em;color:rgba(255,255,255,.5);margin-top:3px;text-transform:uppercase;}
+.main-nav{display:flex;align-items:center;gap:26px;}
+.main-nav a{font-size:.8rem;color:rgba(255,255,255,.88);letter-spacing:.12em;font-weight:500;position:relative;padding:8px 0;}
+.main-nav a:not(.nav-cta)::after{content:"";position:absolute;left:0;bottom:2px;width:0;height:1px;background:var(--gold-soft);transition:width .3s;}
+.main-nav a:not(.nav-cta):hover::after{width:100%;}
+.main-nav a:not(.nav-cta):hover{color:var(--gold-soft);}
+.nav-cta{border:1px solid var(--gold);color:var(--gold-soft)!important;padding:9px 22px!important;letter-spacing:.1em;transition:.3s;}
+.nav-cta:hover{background:var(--gold);color:var(--navy-deep)!important;}
+
+.burger{display:none;flex-direction:column;gap:5px;width:26px;z-index:1200;}
+.burger span{display:block;height:2px;width:100%;background:#fff;transition:.3s;}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0;}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{
+  position:fixed;top:0;right:0;height:100vh;width:80%;max-width:340px;
+  background:var(--navy-deep);transform:translateX(100%);transition:transform .35s ease;
+  z-index:1150;padding:110px 36px 40px;display:flex;flex-direction:column;gap:22px;overflow-y:auto;
+}
+.mobile-menu.open{transform:translateX(0);}
+.mobile-menu a{color:#fff;font-size:1rem;letter-spacing:.06em;font-family:"Noto Serif JP",serif;}
+.mobile-menu .mm-cta{display:inline-block;background:var(--gold);color:var(--navy-deep);padding:12px 20px;text-align:center;margin-top:8px;font-weight:700;}
+.overlay{position:fixed;inset:0;background:rgba(8,23,41,.55);opacity:0;pointer-events:none;transition:opacity .35s;z-index:1120;}
+.overlay.show{opacity:1;pointer-events:auto;}
+@media (max-width:1024px){
+  .main-nav{display:none;}
+  .burger{display:flex;}
+}
+
+/* ---------- hero ---------- */
+#top{position:relative;min-height:100vh;background:linear-gradient(175deg,#123a63 0%,#0d2340 46%,#0a1c33 100%);overflow:hidden;}
+.hero-inner{max-width:1320px;margin:0 auto;padding:0 40px;min-height:100vh;position:relative;}
+.hero-text{max-width:540px;padding:calc(var(--topbar-h) + var(--header-h) + 62px) 0 72px;position:relative;z-index:2;}
+.hero-text .kicker{display:flex;align-items:center;gap:16px;font-family:"Noto Serif JP",serif;font-size:.88rem;letter-spacing:.36em;color:var(--gold-soft);margin-bottom:32px;}
+.hero-text .kicker::before{content:"";width:40px;height:1px;background:var(--gold);}
+.hero-text .kicker-sep{width:4px;height:4px;border-radius:50%;background:var(--gold-soft);display:inline-block;opacity:.7;}
+.hero-catch{
+  font-size:clamp(1.7rem,3vw,2.5rem);line-height:1.7;color:#fff;font-weight:700;letter-spacing:.08em;
+  padding-bottom:24px;margin-bottom:28px;border-bottom:1px solid rgba(201,162,39,.4);position:relative;
+}
+.hero-catch::after{content:"";position:absolute;left:0;bottom:-1px;width:64px;height:1px;background:var(--gold-soft);}
+.hero-catch .accent{color:var(--gold-soft);}
+.name-kana{font-size:.84rem;color:rgba(255,255,255,.6);letter-spacing:.42em;margin-bottom:10px;}
+.name-kanji{font-family:"Noto Serif JP",serif;font-size:clamp(2.6rem,4.6vw,4rem);font-weight:700;color:#fff;letter-spacing:.1em;line-height:1.22;margin-bottom:26px;}
+.hero-lead{color:rgba(255,255,255,.68);font-size:.98rem;max-width:440px;margin-bottom:42px;}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;}
+.hero-visual{position:absolute;right:max(32px, calc(50vw - 660px));bottom:0;z-index:1;height:min(74vh,640px);}
+.hero-photo-frame{position:relative;height:100%;}
+.hero-photo-frame::before{content:"";position:absolute;top:22px;left:-22px;width:100%;height:100%;border:1px solid var(--gold);z-index:0;}
+.hero-photo-frame .frame{position:relative;z-index:1;height:100%;aspect-ratio:1/1;background:#fff;padding:12px;box-sizing:border-box;box-shadow:0 28px 60px rgba(0,0,0,.4);}
+.hero-photo-frame img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(6%) contrast(1.02);}
+@media (max-width:1024px){
+  #top{min-height:0;}
+  .hero-inner{min-height:0;padding-bottom:0;}
+  .hero-text{max-width:640px;margin:0 auto;text-align:center;padding:calc(var(--topbar-h) + var(--header-h) + 40px) 0 40px;}
+  .hero-text .kicker{justify-content:center;}
+  .hero-lead{margin-left:auto;margin-right:auto;}
+  .hero-btns{justify-content:center;}
+  .hero-visual{position:static;height:auto;display:flex;justify-content:center;margin:0 auto 56px;}
+  .hero-photo-frame{height:auto;width:min(70vw,340px);}
+  .hero-photo-frame::before{display:none;}
+}
+@media (max-width:480px){
+  .hero-catch{font-size:1.3rem;}
+  .name-kanji{font-size:2.6rem;}
+}
+
+/* ---------- message ---------- */
+#message{background:var(--paper-soft);}
+.message-wrap{max-width:700px;}
+.message-body{margin-top:36px;border-top:1px solid var(--line);padding-top:36px;}
+.message-body p{color:var(--ink-soft);font-size:.98rem;margin-bottom:22px;}
+.message-body p:last-child{margin-bottom:0;}
+@media (max-width:768px){section{padding:76px 0;}}
+
+/* ---------- activity: numbered vertical list ---------- */
+.num-list{border-top:1px solid var(--navy-deep);margin-top:52px;}
+.num-row{display:grid;grid-template-columns:90px 180px 1fr;gap:36px;align-items:center;padding:44px 0;border-bottom:1px solid var(--line);}
+.num-row .num{font-family:"EB Garamond",serif;font-size:3.4rem;font-weight:500;color:var(--gold);line-height:1;}
+.num-row .thumb{aspect-ratio:3/2;overflow:hidden;border:1px solid var(--line);}
+.num-row .thumb img{width:100%;height:100%;object-fit:cover;filter:grayscale(8%);}
+.num-row h3{font-size:1.24rem;color:var(--navy-deep);margin-bottom:14px;font-weight:700;letter-spacing:.03em;}
+.num-row p{color:var(--ink-soft);font-size:.94rem;max-width:640px;}
+.activity-note{margin-top:36px;color:var(--ink-soft);font-size:.86rem;max-width:900px;}
+.activity-note a{color:var(--navy-deep);font-weight:700;border-bottom:1px solid var(--gold);}
+@media (max-width:860px){
+  .num-row{grid-template-columns:56px 130px 1fr;gap:24px;padding:36px 0;}
+  .num-row .num{font-size:2.5rem;}
+}
+@media (max-width:560px){
+  .num-row{grid-template-columns:1fr;gap:16px;}
+  .num-row .thumb{max-width:220px;}
+  .num-row .num{font-size:2rem;}
+}
+
+/* ---------- work ---------- */
+#work{background:var(--paper-soft);}
+.work-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:48px;align-items:start;}
+.work-para{color:var(--ink-soft);font-size:.96rem;margin-bottom:20px;}
+.work-para:last-of-type{margin-bottom:0;}
+.video-frame{position:relative;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line);background:var(--navy-deep);}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+.video-caption{margin-top:16px;font-size:.84rem;}
+.video-caption a{color:var(--navy-deep);font-weight:600;border-bottom:1px solid var(--gold);padding-bottom:2px;}
+.work-facts{margin-top:80px;border-top:1px solid var(--navy-deep);border-bottom:1px solid var(--line);}
+.work-facts-grid{display:grid;grid-template-columns:repeat(3,1fr);}
+.wf-cell{padding:40px 24px;text-align:center;border-right:1px solid var(--line);}
+.wf-cell:last-child{border-right:none;}
+.wf-num{font-family:"Noto Serif JP",serif;font-size:2.5rem;font-weight:700;color:var(--navy-deep);line-height:1;}
+.wf-num .unit{font-size:1rem;color:var(--gold-deep);margin-left:4px;font-family:"Noto Sans JP",sans-serif;font-weight:600;}
+.wf-label{margin-top:14px;font-size:.82rem;letter-spacing:.06em;color:var(--ink-soft);}
+@media (max-width:860px){.work-grid{grid-template-columns:1fr;gap:40px;}}
+@media (max-width:520px){
+  .work-facts-grid{grid-template-columns:1fr;}
+  .wf-cell{border-right:none;border-bottom:1px solid var(--line);}
+  .wf-cell:last-child{border-bottom:none;}
+}
+
+/* ---------- sanpo: hairline grid ---------- */
+.sanpo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:48px;}
+.sanpo-cell{background:#fff;}
+.sanpo-cell .thumb{aspect-ratio:1/1;overflow:hidden;}
+.sanpo-cell .thumb img{width:100%;height:100%;object-fit:cover;filter:grayscale(10%);transition:filter .3s ease;}
+.sanpo-cell:hover .thumb img{filter:grayscale(0);}
+.sanpo-cell .cap{padding:20px 22px;display:flex;align-items:center;gap:12px;}
+.sanpo-cell .cap svg{width:15px;height:15px;fill:var(--gold-deep);flex-shrink:0;}
+.sanpo-cell .cap span{font-size:.9rem;font-weight:600;color:var(--navy-deep);}
+.sanpo-more{text-align:center;margin-top:52px;}
+@media (max-width:640px){.sanpo-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:400px){.sanpo-grid{grid-template-columns:1fr;}}
+
+/* ---------- weekly ---------- */
+#weekly{background:var(--paper-soft);}
+.weekly-panel{margin-top:48px;border:1px solid var(--line);display:grid;grid-template-columns:1.05fr .95fr;background:#fff;}
+.wp-text{padding:56px 52px;}
+.wp-text p{color:var(--ink-soft);font-size:.96rem;}
+.wp-sns{padding:56px 52px;border-left:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;gap:0;}
+.wp-row{display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);}
+.wp-row:last-child{border-bottom:none;padding-bottom:0;}
+.wp-row:first-child{padding-top:0;}
+.wp-ic{width:40px;height:40px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold-deep);}
+.wp-ic svg{width:17px;height:17px;fill:currentColor;}
+.wp-row strong{display:block;font-size:.92rem;color:var(--navy-deep);}
+.wp-row small{color:var(--ink-soft);font-size:.8rem;}
+@media (max-width:860px){
+  .weekly-panel{grid-template-columns:1fr;}
+  .wp-sns{border-left:none;border-top:1px solid var(--line);}
+  .wp-text,.wp-sns{padding:40px 32px;}
+}
+
+/* ---------- profile ---------- */
+.profile-top{display:grid;grid-template-columns:.86fr 1.14fr;gap:72px;align-items:center;margin-top:52px;}
+.profile-photo{position:relative;}
+.profile-photo::before{content:"";position:absolute;top:20px;left:-20px;width:100%;height:100%;border:1px solid var(--gold);z-index:-1;}
+.profile-photo .frame{aspect-ratio:1/1;overflow:hidden;}
+.profile-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(8%);}
+.profile-badge{position:absolute;left:0;bottom:0;background:var(--navy-deep);color:#fff;padding:11px 20px;font-size:.76rem;letter-spacing:.1em;border-left:3px solid var(--gold);}
+.profile-name{font-size:1.7rem;color:var(--navy-deep);font-weight:700;margin-bottom:4px;letter-spacing:.06em;}
+.profile-name span{display:block;font-size:.8rem;color:var(--ink-soft);font-weight:500;letter-spacing:.14em;margin-top:8px;}
+.profile-tags{margin-top:26px;display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line);}
+.profile-tags li{font-size:.88rem;color:var(--ink-soft);padding:14px 4px;border-bottom:1px solid var(--line);}
+.timeline-list{border-top:1px solid var(--navy-deep);margin-top:88px;}
+.timeline-row{display:grid;grid-template-columns:120px 1fr;gap:36px;padding:38px 0;border-bottom:1px solid var(--line);}
+.timeline-row .num{font-family:"EB Garamond",serif;font-size:2.05rem;font-weight:500;color:var(--gold);}
+.timeline-row h3{font-size:1.06rem;color:var(--navy-deep);margin-bottom:8px;font-weight:700;}
+.timeline-row p{color:var(--ink-soft);font-size:.9rem;}
+@media (max-width:860px){
+  .profile-top{grid-template-columns:1fr;gap:44px;}
+  .profile-photo{max-width:340px;margin:0 auto;width:100%;}
+  .timeline-list{margin-top:56px;}
+}
+@media (max-width:560px){.timeline-row{grid-template-columns:76px 1fr;gap:18px;padding:26px 0;}.timeline-row .num{font-size:1.5rem;}}
+
+/* ---------- reuse ---------- */
+#reuse{background:linear-gradient(165deg,var(--navy-deep),var(--navy-black));color:rgba(255,255,255,.86);}
+.reuse-inner{max-width:680px;margin:0 auto;text-align:center;}
+.reuse-inner .lead{margin:0 auto 22px;}
+.reuse-text{color:rgba(255,255,255,.7);font-size:.95rem;margin-bottom:40px;text-align:left;}
+.reuse-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-bottom:30px;}
+.reuse-note{font-size:.8rem;color:rgba(255,255,255,.58);text-align:left;border-left:1px solid var(--gold);padding-left:18px;}
+
+/* ---------- contact ---------- */
+#contact{background:var(--paper-soft);}
+.contact-panel{margin-top:52px;background:var(--navy-deep);padding:64px 56px;display:grid;grid-template-columns:.86fr 1.14fr;gap:52px;align-items:center;}
+.contact-panel .cp-left h2{color:#fff;}
+.contact-panel .cp-left p{color:rgba(255,255,255,.66);font-size:.95rem;margin-top:10px;}
+.contact-sns-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+.contact-sns-grid a{display:flex;align-items:center;gap:14px;padding:16px 18px;border:1px solid rgba(255,255,255,.22);transition:border-color .25s ease,background .25s ease;}
+.contact-sns-grid a:hover{border-color:var(--gold-soft);background:rgba(255,255,255,.05);}
+.cs-ic{width:40px;height:40px;border-radius:50%;border:1px solid var(--gold-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cs-ic svg{width:16px;height:16px;fill:#fff;}
+.contact-sns-grid span{color:#fff;font-size:.86rem;font-weight:600;letter-spacing:.03em;}
+@media (max-width:860px){.contact-panel{grid-template-columns:1fr;padding:44px 32px;}}
+@media (max-width:480px){.contact-sns-grid{grid-template-columns:1fr;}}
+
+/* ---------- footer ---------- */
+footer{background:var(--navy-black);color:rgba(255,255,255,.75);padding-top:88px;}
+.footer-grid{max-width:1280px;margin:0 auto;padding:0 40px 54px;display:grid;grid-template-columns:1.3fr 1fr 1.3fr;gap:52px;border-bottom:1px solid rgba(255,255,255,.14);}
+.footer-logo{font-family:"Noto Serif JP",serif;font-size:1.5rem;color:#fff;font-weight:700;margin-bottom:8px;letter-spacing:.1em;}
+.footer-logo span{color:var(--gold-soft);}
+.footer-tag{font-size:.88rem;color:var(--gold-soft);margin-bottom:26px;letter-spacing:.05em;}
+.footer-social{display:flex;gap:14px;}
+.footer-social a{width:36px;height:36px;border:1px solid rgba(255,255,255,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.25s;}
+.footer-social a:hover{background:var(--gold);border-color:var(--gold);}
+.footer-social svg{width:15px;height:15px;fill:#fff;}
+footer h4{color:#fff;font-size:.9rem;letter-spacing:.1em;margin-bottom:22px;font-family:"Noto Serif JP",serif;}
+.footer-nav-list{display:flex;flex-direction:column;gap:13px;}
+.footer-nav-list a{font-size:.88rem;color:rgba(255,255,255,.7);}
+.footer-nav-list a:hover{color:var(--gold-soft);}
+.footer-note{font-size:.8rem;color:rgba(255,255,255,.55);line-height:1.9;}
+.footer-bottom{max-width:1280px;margin:0 auto;padding:26px 40px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.8rem;color:rgba(255,255,255,.5);}
+@media (max-width:860px){.footer-grid{grid-template-columns:1fr 1fr;gap:40px;}}
+@media (max-width:560px){.footer-grid{grid-template-columns:1fr;padding-top:56px;}}
+
+.back-top{
+  position:fixed;right:28px;bottom:28px;width:50px;height:50px;border-radius:50%;
+  background:var(--navy-deep);border:1px solid var(--gold);color:var(--gold-soft);
+  display:flex;align-items:center;justify-content:center;z-index:900;opacity:0;pointer-events:none;transition:.3s;
+}
+.back-top svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.back-top.show{opacity:1;pointer-events:auto;}
+.back-top:hover{background:var(--gold);color:var(--navy-deep);}
+@media (max-width:600px){.back-top{width:44px;height:44px;right:16px;bottom:16px;}}
+</style>
+</head>
+<body>
+
+<!-- ================= UTILITY BAR ================= -->
+<div class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <p class="topbar-tag"><span class="full">再生の道 府中市ボランティア</span><span aria-hidden="true">｜</span>交通コンサルタント</p>
+    <div class="topbar-sns">
+      <a href="https://x.com/musashinokj" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L1.2 2h6.4l4.4 5.9L18.9 2zm-1.1 18.1h1.7L7.7 3.8H5.8l12 16.3z"/></svg></a>
+      <a href="https://www.instagram.com/junta.murakoshi" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.6-.1-4.9s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.6-.1 4.9-.1zm0 1.8c-3.1 0-3.5 0-4.8.1-1.1.1-1.5.2-1.9.3-.5.2-.8.4-1.1.7-.3.3-.5.6-.7 1.1-.1.4-.3.8-.3 1.9-.1 1.2-.1 1.6-.1 4.8s0 3.5.1 4.8c.1 1.1.2 1.5.3 1.9.2.5.4.8.7 1.1.3.3.6.5 1.1.7.4.1.8.3 1.9.3 1.2.1 1.6.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.5-.2 1.9-.3.5-.2.8-.4 1.1-.7.3-.3.5-.6.7-1.1.1-.4.3-.8.3-1.9.1-1.2.1-1.6.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.5-.3-1.9-.2-.5-.4-.8-.7-1.1-.3-.3-.6-.5-1.1-.7-.4-.1-.8-.3-1.9-.3-1.2-.1-1.6-.1-4.8-.1zm0 3.1a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm5.2-3.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg></a>
+      <a href="https://www.youtube.com/@Junta.Murakoshi" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8zM9.6 15.6V8.4L15.8 12l-6.2 3.6z"/></svg></a>
+      <a href="https://www.facebook.com/JuntaMurakoshi" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4h-3V12h3V9.4c0-3 1.8-4.7 4.6-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.3l-.5 3.5h-2.8v8.4A12 12 0 0 0 24 12z"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<!-- ================= HEADER ================= -->
+<header id="siteHeader">
+  <div class="nav-inner">
+    <a href="#top" class="logo">村越<span>じゅんた</span><small>MURAKOSHI JUNTA</small></a>
+    <nav class="main-nav">
+      <a href="#message">想い</a>
+      <a href="#activity">活動</a>
+      <a href="#work">交通のプロ</a>
+      <a href="#profile">プロフィール</a>
+      <a href="#contact">SNS</a>
+      <a href="#reuse" class="nav-cta">家電寄贈のお願い</a>
+    </nav>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="mobileMenu" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="overlay" id="overlay"></div>
+<nav class="mobile-menu" id="mobileMenu" aria-label="モバイルメニュー">
+  <a href="#message">想い</a>
+  <a href="#activity">活動</a>
+  <a href="#work">交通のプロ</a>
+  <a href="#profile">プロフィール</a>
+  <a href="#contact">SNS</a>
+  <a href="#reuse" class="mm-cta">家電寄贈のお願い</a>
+</nav>
+
+<main>
+
+<!-- ================= HERO ================= -->
+<section id="top">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="kicker">再生の道 府中市ボランティア<span class="kicker-sep" aria-hidden="true"></span>交通コンサルタント</p>
+      <h1 class="hero-catch">府中に、<span class="accent">むちゅう。</span></h1>
+      <p class="name-kana">むらこし じゅんた</p>
+      <p class="name-kanji">村越じゅんた</p>
+      <p class="hero-lead">暮らしを守る、交通のプロ。<br>毎週、まちの清掃からはじめています。</p>
+      <div class="hero-btns">
+        <a class="btn btn-gold" href="#activity">活動を見る</a>
+        <a class="btn btn-ghost" href="https://www.youtube.com/@Junta.Murakoshi" target="_blank" rel="noopener">YouTubeを見る</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-photo-frame">
+        <div class="frame">
+          <img src="../assets/img/hero_portrait.webp" width="807" height="808"
+               alt="村越じゅんたのポートレート。紺のジャケットに紫のスカーフ、笑顔" fetchpriority="high">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MESSAGE ================= -->
+<section id="message">
+  <div class="wrap message-wrap">
+    <div class="eyebrow">Message</div>
+    <div class="sec-head"><h2>派手なことより、続けること。</h2></div>
+    <div class="message-body">
+      <p>毎週土曜日の朝は、地域のみなさんとの清掃活動からはじまります。平日も、駅前や通学路で気になった場所があれば、ほうきを持って向かいます。</p>
+      <p>1年以上続けるうちに、通学中の子どもたちが「ありがとう」と声をかけてくれるようになりました。近所の方から、そっと飲み物をいただくこともあります。特別なことをしているつもりはありません。まちの困りごとは、現場に立たないと見えてこない――交通コンサルタントとして20年、道路や駅前広場の計画に携わってきた経験も、原点は同じです。</p>
+      <p>大きな言葉を並べるより、続けてきた事実を見ていただきたい。活動は毎週、SNSでご報告しています。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACTIVITY (numbered list) ================= -->
+<section id="activity">
+  <div class="wrap">
+    <div class="eyebrow">Activity</div>
+    <div class="sec-head">
+      <h2>いま、やっていること。</h2>
+      <p class="lead">肩書きではなく、手を動かすこと。府中のまちで続けている3つの活動です。</p>
+    </div>
+    <div class="num-list">
+      <div class="num-row">
+        <span class="num">01</span>
+        <div class="thumb">
+          <img src="../assets/img/act_shrine.webp" width="480" height="320" loading="lazy"
+               alt="府中市再生ボランティアのビブスを着て、神社の境内でほうきとごみ袋を手に清掃する村越じゅんた">
+        </div>
+        <div>
+          <h3>まちを、きれいに。</h3>
+          <p>毎週土曜の朝は団体清掃、平日は個人でも。駅前のロータリー、通学路、神社の境内。1年以上、続けています。</p>
+        </div>
+      </div>
+      <div class="num-row">
+        <span class="num">02</span>
+        <div class="thumb">
+          <img src="../assets/img/act_street.webp" width="480" height="320" loading="lazy"
+               alt="通学路の歩道で、集めた草のごみ袋とともに立つ村越じゅんた">
+        </div>
+        <div>
+          <h3>通学路を、安全に。</h3>
+          <p>小学校の通学路にのびた雑草の処理も、交通の専門家の仕事のうち。見通しのよい道は、子どもたちの安全につながります。</p>
+        </div>
+      </div>
+      <div class="num-row">
+        <span class="num">03</span>
+        <div class="thumb">
+          <img src="../assets/img/act_bus.webp" width="495" height="330" loading="lazy"
+               alt="雨上がりのバス停で、ほうきとちりとりを手にしゃがんで笑う村越じゅんた">
+        </div>
+        <div>
+          <h3>雨の日も、コツコツと。</h3>
+          <p>天気が崩れて団体清掃が中止になった日も、あがった頃合いをみて、ひとりで駅前へ。続けることが、いちばんの信頼だと思っています。</p>
+        </div>
+      </div>
+    </div>
+    <p class="activity-note">このほか、援農ボランティアとして武蔵野・府中・三鷹の農家のお手伝いも始めました。畑や水田の保水力は、まちの防災力でもあります。<br>児童養護施設から巣立つ若者への家電支援は、<a href="#reuse">「家電寄贈のお願い」</a>をご覧ください。</p>
+  </div>
+</section>
+
+<!-- ================= WORK ================= -->
+<section id="work">
+  <div class="wrap">
+    <div class="eyebrow">Profession</div>
+    <div class="sec-head"><h2>交通は、暮らしのインフラ。</h2></div>
+    <div class="work-grid">
+      <div>
+        <p class="work-para">再開発でビルが建つとき、車と人の流れがどう変わるか。それを計算し、道路や交通施設への影響を評価して、行政や交通管理者と協議を重ねる――そんな交通コンサルタントの仕事を、2006年から20年続けてきました。2012年には株式会社都市交通企画(武蔵野市)の設立に加わり、取締役として経営に携わっています。</p>
+        <p class="work-para">渋滞も、通学路の安全も、バスの本数も、駅前の使いやすさも。交通は、毎日の暮らしそのものです。</p>
+      </div>
+      <div>
+        <div class="video-frame">
+          <iframe src="https://www.youtube-nocookie.com/embed/B7JWWvv4Uy0" title="【再生の道】「暮らしを守る交通のプロ」交通専門コンサルタント・村越じゅんた(府中市)"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <p class="video-caption">
+          <a href="https://www.youtube.com/watch?v=B7JWWvv4Uy0" target="_blank" rel="noopener">再生の道 公式チャンネルの紹介動画(YouTube)</a>
+        </p>
+      </div>
+    </div>
+    <div class="work-facts">
+      <div class="work-facts-grid">
+        <div class="wf-cell"><div class="wf-num">20<span class="unit">年</span></div><div class="wf-label">交通コンサルタント</div></div>
+        <div class="wf-cell"><div class="wf-num">毎週<span class="unit">継続中</span></div><div class="wf-label">まちの清掃活動</div></div>
+        <div class="wf-cell"><div class="wf-num">1982<span class="unit">年生まれ</span></div><div class="wf-label">府中育ち</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SANPO ================= -->
+<section id="sanpo">
+  <div class="wrap">
+    <div class="sec-head sec-head--center">
+      <div class="eyebrow">YouTube</div>
+      <h2>歩くと、まちが見えてくる。</h2>
+      <p class="lead">YouTube「淳さんぽ」。府中のまちを歩きながら、交通と暮らしの目線で気づいたことをお話ししています。</p>
+    </div>
+    <div class="sanpo-grid">
+      <a class="sanpo-cell" href="https://www.youtube.com/watch?v=P18rnRufKVE" target="_blank" rel="noopener">
+        <div class="thumb"><img src="../assets/img/sanpo_kyodo.webp" width="560" height="560" loading="lazy" alt="淳さんぽ 府中市郷土の森の回のサムネイル。コミュニティバス「ちゅうバス」"></div>
+        <div class="cap"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.6 15.6V8.4L15.8 12z"/></svg><span>府中市郷土の森</span></div>
+      </a>
+      <a class="sanpo-cell" href="https://www.youtube.com/watch?v=SL5E2aWD_Wo" target="_blank" rel="noopener">
+        <div class="thumb"><img src="../assets/img/sanpo_fuchueki.webp" width="560" height="560" loading="lazy" alt="淳さんぽ 府中駅前ロータリーの回のサムネイル"></div>
+        <div class="cap"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.6 15.6V8.4L15.8 12z"/></svg><span>府中駅前ロータリー</span></div>
+      </a>
+      <a class="sanpo-cell" href="https://www.youtube.com/watch?v=EZQrBDZMz8U" target="_blank" rel="noopener">
+        <div class="thumb"><img src="../assets/img/sanpo_bubai.webp" width="560" height="560" loading="lazy" alt="淳さんぽ 分倍河原の回のサムネイル"></div>
+        <div class="cap"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.6 15.6V8.4L15.8 12z"/></svg><span>分倍河原</span></div>
+      </a>
+    </div>
+    <div class="sanpo-more">
+      <a class="btn btn-navy" href="https://www.youtube.com/@Junta.Murakoshi" target="_blank" rel="noopener">チャンネルを見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WEEKLY ================= -->
+<section id="weekly">
+  <div class="wrap">
+    <div class="eyebrow">Weekly Report</div>
+    <div class="weekly-panel">
+      <div class="wp-text">
+        <h2 style="font-size:1.5rem;color:var(--navy-deep);margin-bottom:18px;letter-spacing:.04em;">毎週、活動をご報告しています。</h2>
+        <p>今週どこを掃除したか、誰と会って、何を教わったか。飾らない週報を、InstagramとXで毎週発信しています。ぜひのぞいてみてください。</p>
+      </div>
+      <div class="wp-sns">
+        <a class="wp-row" href="https://www.instagram.com/junta.murakoshi" target="_blank" rel="noopener">
+          <span class="wp-ic"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.6-.1-4.9s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.6-.1 4.9-.1zm0 1.8c-3.1 0-3.5 0-4.8.1-1.1.1-1.5.2-1.9.3-.5.2-.8.4-1.1.7-.3.3-.5.6-.7 1.1-.1.4-.3.8-.3 1.9-.1 1.2-.1 1.6-.1 4.8s0 3.5.1 4.8c.1 1.1.2 1.5.3 1.9.2.5.4.8.7 1.1.3.3.6.5 1.1.7.4.1.8.3 1.9.3 1.2.1 1.6.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.5-.2 1.9-.3.5-.2.8-.4 1.1-.7.3-.3.5-.6.7-1.1.1-.4.3-.8.3-1.9.1-1.2.1-1.6.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.5-.3-1.9-.2-.5-.4-.8-.7-1.1-.3-.3-.6-.5-1.1-.7-.4-.1-.8-.3-1.9-.3-1.2-.1-1.6-.1-4.8-.1zm0 3.1a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm5.2-3.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg></span>
+          <span><strong>Instagram</strong><small>@junta.murakoshi</small></span>
+        </a>
+        <a class="wp-row" href="https://x.com/musashinokj" target="_blank" rel="noopener">
+          <span class="wp-ic"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L1.2 2h6.4l4.4 5.9L18.9 2zm-1.1 18.1h1.7L7.7 3.8H5.8l12 16.3z"/></svg></span>
+          <span><strong>X</strong><small>@musashinokj</small></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROFILE ================= -->
+<section id="profile">
+  <div class="wrap">
+    <div class="eyebrow">Profile</div>
+    <div class="sec-head"><h2>村越じゅんたの歩み。</h2></div>
+    <div class="profile-top">
+      <div class="profile-photo">
+        <div class="frame">
+          <img src="../assets/img/profile_square.webp" width="300" height="300" loading="lazy" alt="村越じゅんたの顔写真">
+        </div>
+        <span class="profile-badge">再生の道　府中市ボランティア</span>
+      </div>
+      <div>
+        <p class="profile-name">村越 淳太<span>むらこし じゅんた</span></p>
+        <ul class="profile-tags">
+          <li>1982年生まれ</li>
+          <li>東京都武蔵野市生まれ・府中市育ち</li>
+          <li>株式会社都市交通企画 取締役</li>
+          <li>認定NPO法人プラネットカナール 副理事長</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-list">
+      <div class="timeline-row">
+        <span class="num">1982</span>
+        <div><h3>東京都武蔵野市に生まれる</h3><p>まもなく府中市へ。府中のまちで育つ。</p></div>
+      </div>
+      <div class="timeline-row">
+        <span class="num">1998</span>
+        <div><h3>府中市立第二中学校 卒業</h3><p>その後、私立和光高等学校・和光大学経済学部経済学科へ。</p></div>
+      </div>
+      <div class="timeline-row">
+        <span class="num">2006</span>
+        <div><h3>交通コンサルタントの道へ</h3><p>株式会社都市・交通企画(千代田区)に入社。再開発に伴う交通量の算定・影響評価・行政協議に携わる。</p></div>
+      </div>
+      <div class="timeline-row">
+        <span class="num">2012</span>
+        <div><h3>株式会社都市交通企画を設立</h3><p>勤務先(株式会社都市・交通企画)とは別の会社を武蔵野市に設立し、取締役として交通コンサルティングを続ける。</p></div>
+      </div>
+      <div class="timeline-row">
+        <span class="num">2026</span>
+        <div><h3>認定NPO法人プラネットカナール 副理事長に就任</h3><p>児童養護施設から巣立つ若者へ、リユース家電・家具を届ける事業に参画。</p></div>
+      </div>
+      <div class="timeline-row">
+        <span class="num">現在</span>
+        <div><h3>府中のまちで、毎週活動中</h3><p>再生の道 府中市ボランティアとして、清掃活動・援農・地域の発信を続けている。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REUSE ================= -->
+<section id="reuse">
+  <div class="wrap">
+    <div class="reuse-inner">
+      <div class="eyebrow eyebrow--light">Donation</div>
+      <div class="sec-head sec-head--center">
+        <h2 class="light">家電寄贈の、お願い。</h2>
+        <p class="lead light">使わなくなった家電が、若者の新生活の力になります。</p>
+      </div>
+      <p class="reuse-text">認定NPO法人プラネットカナール(村越が副理事長を務めています)では、児童養護施設から巣立つ若者の新しい暮らしに、リユース家電・家具を届けています。いま、寄贈いただける家電が足りていません。ご自宅に眠っている家電・家具がありましたら、フォームから対象品目をご確認のうえ、お知らせください。</p>
+      <div class="reuse-btns">
+        <a class="btn btn-gold" href="https://docs.google.com/forms/d/e/1FAIpQLSe4DnVeYI9LdldJdtuti_cgeQETK0g8HhqURRJVZ_h4wasCOg/viewform" target="_blank" rel="noopener">寄贈申出フォームへ</a>
+        <a class="btn btn-ghost" href="https://planetcanal.org/" target="_blank" rel="noopener">プラネットカナールのサイトへ</a>
+      </div>
+      <p class="reuse-note">※ 本件は認定NPO法人プラネットカナールの事業であり、村越じゅんた個人およびその政治活動への寄附ではありません。お申込み・お問い合わせは同法人が受け付けます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Follow</div>
+    <div class="contact-panel">
+      <div class="cp-left">
+        <h2>SNSで、<br>つながってください。</h2>
+        <p>活動の最新情報はSNSでお届けしています。フォローやメッセージ、お気軽にどうぞ。</p>
+      </div>
+      <div class="contact-sns-grid">
+        <a href="https://x.com/musashinokj" target="_blank" rel="noopener" aria-label="X(旧Twitter) @musashinokj">
+          <span class="cs-ic"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L1.2 2h6.4l4.4 5.9L18.9 2zm-1.1 18.1h1.7L7.7 3.8H5.8l12 16.3z"/></svg></span>
+          <span>X</span>
+        </a>
+        <a href="https://www.instagram.com/junta.murakoshi" target="_blank" rel="noopener" aria-label="Instagram @junta.murakoshi">
+          <span class="cs-ic"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.6-.1-4.9s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.6-.1 4.9-.1zm0 1.8c-3.1 0-3.5 0-4.8.1-1.1.1-1.5.2-1.9.3-.5.2-.8.4-1.1.7-.3.3-.5.6-.7 1.1-.1.4-.3.8-.3 1.9-.1 1.2-.1 1.6-.1 4.8s0 3.5.1 4.8c.1 1.1.2 1.5.3 1.9.2.5.4.8.7 1.1.3.3.6.5 1.1.7.4.1.8.3 1.9.3 1.2.1 1.6.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.5-.2 1.9-.3.5-.2.8-.4 1.1-.7.3-.3.5-.6.7-1.1.1-.4.3-.8.3-1.9.1-1.2.1-1.6.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.5-.3-1.9-.2-.5-.4-.8-.7-1.1-.3-.3-.6-.5-1.1-.7-.4-.1-.8-.3-1.9-.3-1.2-.1-1.6-.1-4.8-.1zm0 3.1a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm5.2-3.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg></span>
+          <span>Instagram</span>
+        </a>
+        <a href="https://www.youtube.com/@Junta.Murakoshi" target="_blank" rel="noopener" aria-label="YouTube 村越じゅんたチャンネル">
+          <span class="cs-ic"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8zM9.6 15.6V8.4L15.8 12l-6.2 3.6z"/></svg></span>
+          <span>YouTube</span>
+        </a>
+        <a href="https://www.facebook.com/JuntaMurakoshi" target="_blank" rel="noopener" aria-label="Facebook 村越じゅんた">
+          <span class="cs-ic"><svg viewBox="0 0 24 24"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4h-3V12h3V9.4c0-3 1.8-4.7 4.6-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.3l-.5 3.5h-2.8v8.4A12 12 0 0 0 24 12z"/></svg></span>
+          <span>Facebook</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">村越<span>じゅんた</span></div>
+      <p class="footer-tag">暮らしを守る、交通のプロ。</p>
+      <div class="footer-social">
+        <a href="https://x.com/musashinokj" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L1.2 2h6.4l4.4 5.9L18.9 2zm-1.1 18.1h1.7L7.7 3.8H5.8l12 16.3z"/></svg></a>
+        <a href="https://www.instagram.com/junta.murakoshi" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.6-.1-4.9s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.6-.1 4.9-.1zm0 1.8c-3.1 0-3.5 0-4.8.1-1.1.1-1.5.2-1.9.3-.5.2-.8.4-1.1.7-.3.3-.5.6-.7 1.1-.1.4-.3.8-.3 1.9-.1 1.2-.1 1.6-.1 4.8s0 3.5.1 4.8c.1 1.1.2 1.5.3 1.9.2.5.4.8.7 1.1.3.3.6.5 1.1.7.4.1.8.3 1.9.3 1.2.1 1.6.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.5-.2 1.9-.3.5-.2.8-.4 1.1-.7.3-.3.5-.6.7-1.1.1-.4.3-.8.3-1.9.1-1.2.1-1.6.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.5-.3-1.9-.2-.5-.4-.8-.7-1.1-.3-.3-.6-.5-1.1-.7-.4-.1-.8-.3-1.9-.3-1.2-.1-1.6-.1-4.8-.1zm0 3.1a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm5.2-3.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg></a>
+        <a href="https://www.youtube.com/@Junta.Murakoshi" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8zM9.6 15.6V8.4L15.8 12l-6.2 3.6z"/></svg></a>
+        <a href="https://www.facebook.com/JuntaMurakoshi" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4h-3V12h3V9.4c0-3 1.8-4.7 4.6-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.3l-.5 3.5h-2.8v8.4A12 12 0 0 0 24 12z"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <h4>メニュー</h4>
+      <div class="footer-nav-list">
+        <a href="#message">想い</a>
+        <a href="#activity">活動</a>
+        <a href="#work">交通のプロ</a>
+        <a href="#profile">プロフィール</a>
+        <a href="#reuse">家電寄贈のお願い</a>
+      </div>
+    </div>
+    <div>
+      <h4>サイトについて</h4>
+      <p class="footer-note">本ウェブサイトは、村越じゅんた個人が運営する政治活動用ウェブサイトです。<br>政治団体「再生の道」の公式サイトではありません。<br>掲載の写真は本人のSNSで公開したものを本人の承諾のもと使用しています。</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Junta Murakoshi</span>
+  </div>
+</footer>
+
+<a href="#top" class="back-top" id="backTop" aria-label="ページの先頭へ戻る"><svg viewBox="0 0 24 24"><polyline points="6 14 12 8 18 14"/></svg></a>
+
+<script>
+(function(){
+  var topbar = document.getElementById('topbar');
+  var header = document.getElementById('siteHeader');
+  var backTop = document.getElementById('backTop');
+  window.addEventListener('scroll', function(){
+    var y = window.scrollY;
+    var scrolled = y > 10;
+    topbar.classList.toggle('hide', scrolled);
+    header.classList.toggle('scrolled', scrolled);
+    backTop.classList.toggle('show', y > 500);
+  });
+
+  var burger = document.getElementById('burger');
+  var mobileMenu = document.getElementById('mobileMenu');
+  var overlay = document.getElementById('overlay');
+  function closeMenu(){
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded','false');
+    mobileMenu.classList.remove('open');
+    overlay.classList.remove('show');
+  }
+  burger.addEventListener('click', function(){
+    var open = mobileMenu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    overlay.classList.toggle('show', open);
+  });
+  overlay.addEventListener('click', closeMenu);
+  mobileMenu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+})();
+</script>
+</body>
+</html>
