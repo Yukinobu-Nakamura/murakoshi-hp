@@ -1,16 +1,26 @@
-# 村越じゅんた 公式サイト(静的HTML)
+# 村越じゅんた 公式サイト — デザイン提案(全11案)
 
 作成: 2026-09-14 / 発注: 中村さん(再生の道つながりの制作依頼・本人承諾済み)
+**公開URL(ショーケース)**: https://yukinobu-nakamura.github.io/murakoshi-hp/
 
 ## 構成
 ```
-index.html              … 1ページ完結(セクション: hero/message/activity/work/sanpo/weekly/profile/reuse/contact)
-assets/css/style.css    … デザイントークン+レスポンシブ(390/768/1024/1440検証済)
-assets/js/main.js       … ヘッダー縮小・ハンバーガー・スクロールreveal・トップへ戻る(依存ゼロ)
+index.html              … ショーケース(11案タブ切替+PC/スマホ幅トグル)。初期表示=04本命
+patterns/pattern-00.html … ★本命「04 Warm Sincere」(現行案。外部CSS/JS参照の本番構成)
+patterns/pattern-01〜11.html … 残り10案(単一HTML自己完結。04は欠番=pattern-00が04枠)
+assets/css/style.css    … 本命案のCSS(デザイントークン+レスポンシブ)
+assets/js/main.js       … 本命案のJS(依存ゼロ)
 assets/img/             … WebP画像(全て本人SNS由来+favicon/OGPは生成)
 CONTENT_SPEC_MURAKOSHI_C1.md … 文言・素材・法務対応の正本
-_sources/               … 元画像(公開時はアップ不要)
+PATTERNS_SPEC.md        … 11案制作の共通仕様(文言固定・禁止語・検収基準)
+_sources/               … 元画像(git管理外)
 ```
+
+## 11案の検収記録(2026-09-14)
+- 全11ファイルで機械検収 ALL PASS: 禁止語0・必須注記2種完全一致・noindex・絵文字0・外部ドメイン正常
+- 全案の文言・写真・注記は pattern-00(legal-officerレビュー済み)から固定転記。レイアウト骨格のみ別物
+- ショーケースの全タブ切替・iframeロードを機械確認済み
+- 採用案決定後は、そのパターンをルートindex.html化+noindex解除+OGP絶対URL化して本公開する
 
 ## デザイン
 - hp-design-proposal(11パターン)の DESIGN_KATA_C1.md 15ルール+E章トークン規律を適用
