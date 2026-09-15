@@ -128,10 +128,12 @@ a:hover{ color:var(--accent-dp); }
 .hero__text{ padding-bottom:96px; }
 .hero__kicker{
   margin:0 0 24px;
-  font-size:13px; font-weight:500; letter-spacing:.16em; color:var(--accent);
-  display:flex; align-items:center; flex-wrap:wrap; gap:12px;
+  /* 肩書き(再生の道 府中市ボランティア/交通コンサルタント)は読ませる要素なので大きめ。
+     サイズを上げた分、字間と区切り線を詰めて1行維持する */
+  font-size:15px; font-weight:500; letter-spacing:.04em; color:var(--accent);
+  display:flex; align-items:center; flex-wrap:wrap; gap:10px;
 }
-.hero__kicker-sep{ width:24px; border-top:1px solid var(--accent); opacity:.5; }
+.hero__kicker-sep{ width:20px; border-top:1px solid var(--accent); opacity:.5; }
 .hero__catch{
   margin:0 0 32px;
   font-family:var(--serif); font-weight:700;
@@ -139,7 +141,8 @@ a:hover{ color:var(--accent-dp); }
   line-height:1.28; letter-spacing:.04em;
 }
 .hero__name{ margin:0 0 24px; display:flex; flex-direction:column; gap:4px; }
-.hero__name-ruby{ font-size:12px; letter-spacing:.5em; color:var(--ink-soft); }
+/* フリガナ(むらこし じゅんた)は字間を少し詰めたうえでサイズを上げる */
+.hero__name-ruby{ font-size:15px; letter-spacing:.42em; color:var(--ink-soft); }
 .hero__name-main{
   font-family:var(--serif); font-weight:700;
   font-size:var(--hero-type); line-height:1.28; letter-spacing:.06em;
@@ -177,9 +180,10 @@ a:hover{ color:var(--accent-dp); }
    ===================================================== */
 .section{ padding:112px 0; }
 .section--tint{ background:var(--tint); }
+/* セクション見出し(MESSAGE/ACTIVITY/…/FOLLOW)は大きめ＋太字で統一 */
 .section__kicker{
   margin:0 0 16px;
-  font-size:12px; font-weight:500; letter-spacing:.3em; color:var(--accent);
+  font-size:15px; font-weight:700; letter-spacing:.26em; color:var(--accent);
 }
 .section__title{
   margin:0 0 32px;
@@ -356,7 +360,7 @@ a:hover{ color:var(--accent-dp); }
   display:flex; flex-direction:column;
 }
 .profile__name span{
-  font-family:var(--sans); font-weight:400; font-size:11px; letter-spacing:.3em; color:var(--ink-soft);
+  font-family:var(--sans); font-weight:400; font-size:13px; letter-spacing:.26em; color:var(--ink-soft);
 }
 .profile__tags{
   margin:0; padding:0; list-style:none;
@@ -516,7 +520,15 @@ section[id]{ scroll-margin-top:72px; }
   .hero__text{ padding-bottom:48px; order:1; }
   .hero__visual{ order:2; display:flex; justify-content:center; }
   .hero__panel{ width:min(78vw, 420px); }
-  .hero__kicker{ margin-bottom:16px; font-size:11px; letter-spacing:.12em; }
+  /* SPも肩書きを大きく。横線の区切りは幅を食い行末に取り残されるため、
+     文字の区切り(／)に置き換えて通常のテキストとして折り返させる */
+  /* 語中(交通コン/サルタント)で折れないよう、区切り位置でのみ改行させる */
+  .hero__kicker{ margin-bottom:16px; font-size:13px; letter-spacing:.02em; display:block;
+    word-break:keep-all; overflow-wrap:normal; }
+  .hero__kicker-sep{ display:inline; width:auto; border-top:none; opacity:1; }
+  .hero__kicker-sep::before{ content:"／"; margin:0 .2em; opacity:.6; }
+  .hero__name-ruby{ font-size:13px; letter-spacing:.36em; }
+  .section__kicker{ font-size:13px; letter-spacing:.22em; }
   .hero__catch{ margin-bottom:24px; }
   .hero__lead{ font-size:14px; margin-bottom:32px; }
   /* ヘッダー: ロゴ・SNS・ハンバーガーを1行に収める */
