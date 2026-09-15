@@ -45,6 +45,12 @@ PAGE_URL = "https://www.facebook.com/JuntaMurakoshi"
 
 UA = "murakoshi-hp-feed-updater/1.0 (+https://www.facebook.com/JuntaMurakoshi)"
 
+README_NOTE = (
+    "ACTIVITYセクションに表示するFacebook最新投稿3件。"
+    "tools/update_facebook_feed.py が自動で書き換える。"
+    "posts が空の間は index.html に書かれた既定の3カードがそのまま表示される(表示は崩れない)。"
+)
+
 
 def die(msg: str, code: int = 1) -> None:
     print(f"[ERROR] {msg}", file=sys.stderr)
@@ -132,9 +138,7 @@ def main() -> None:
     OUT_JSON.write_text(
         json.dumps(
             {
-                "_readme": OUT_JSON.exists()
-                and json.loads(OUT_JSON.read_text(encoding="utf-8")).get("_readme")
-                or "Facebook最新投稿3件(自動生成)",
+                "_readme": README_NOTE,
                 "updated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                 "source": PAGE_URL,
                 "posts": posts,
