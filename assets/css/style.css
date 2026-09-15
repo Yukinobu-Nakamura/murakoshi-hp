@@ -9,7 +9,7 @@
   --tint:      #f4f1fb;   /* 淡紫の面 */
   --dark:      #2e2749;   /* 深紫紺(契約面) */
   --ink:       #272220;   /* 墨: 暖ニア黒 */
-  --ink-soft:  #6f6862;   /* サブテキスト */
+  --ink-soft:  #4e4741;   /* サブテキスト(可読性のため濃度を上げた) */
   --accent:    #5b48b5;   /* アクセント: 誠実な紫 */
   --accent-dp: #47368f;
   --line:      rgba(39,34,32,.14);
@@ -17,6 +17,8 @@
   --serif: "Zen Old Mincho", "Hiragino Mincho ProN", serif;
   --sans:  "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
   --header-h: 84px;
+  /* ヒーローの「府中に、むちゅう。」と「村越じゅんた」は同一サイズで運用する */
+  --hero-type: 56px;
 }
 
 *,*::before,*::after{ box-sizing:border-box; }
@@ -116,14 +118,29 @@ a:hover{ color:var(--accent-dp); }
 .hero__catch{
   margin:0 0 32px;
   font-family:var(--serif); font-weight:700;
-  font-size:clamp(44px, 5.6vw, 76px);
+  font-size:var(--hero-type);
   line-height:1.28; letter-spacing:.04em;
 }
 .hero__name{ margin:0 0 24px; display:flex; flex-direction:column; gap:4px; }
 .hero__name-ruby{ font-size:12px; letter-spacing:.5em; color:var(--ink-soft); }
+.hero__name-row{ display:flex; align-items:center; flex-wrap:wrap; gap:10px 14px; }
 .hero__name-main{
   font-family:var(--serif); font-weight:700;
-  font-size:clamp(28px, 3vw, 38px); letter-spacing:.14em;
+  font-size:var(--hero-type); line-height:1.28; letter-spacing:.06em;
+  margin-inline-end:-.06em; /* 末尾の字間ぶんを詰めてアイコンを横に収める */
+}
+/* ヒーロー(バナー)の氏名の隣に置くSNSアイコン。幅が足りない画面では自動で下段に回る */
+.hero__sns{ display:flex; align-items:center; gap:11px; }
+.hero__sns a{
+  display:flex; align-items:center; justify-content:center;
+  width:28px; height:28px; border-radius:50%;
+  border:1px solid var(--line-strong); color:var(--ink);
+  transition:background-color .25s, border-color .25s, color .25s, transform .25s;
+}
+.hero__sns svg{ width:14px; height:14px; fill:currentColor; display:block; }
+.hero__sns a:hover{
+  background:var(--accent); border-color:var(--accent); color:#fffdfa;
+  transform:translateY(-2px);
 }
 .hero__lead{
   margin:0 0 40px; font-size:15px; color:var(--ink-soft);
@@ -196,6 +213,19 @@ a:hover{ color:var(--accent-dp); }
   font-family:var(--serif); font-weight:700; font-size:20px; letter-spacing:.06em;
 }
 .card__text{ margin:0; font-size:14px; line-height:2; color:var(--ink-soft); }
+/* Facebook最新投稿カード */
+.card__link{ display:flex; flex-direction:column; height:100%; color:var(--ink); }
+.card__link:hover{ color:var(--ink); }
+.card__link .card__media{ flex-shrink:0; }
+.card__link .card__body{ flex:1; }
+.card__meta{
+  margin:0 0 12px; display:flex; align-items:center; gap:8px;
+  font-size:12px; font-weight:500; letter-spacing:.1em; color:var(--accent);
+}
+.card__meta svg{ width:14px; height:14px; fill:currentColor; flex-shrink:0; }
+.card__more{
+  margin:16px 0 0; font-size:12px; letter-spacing:.06em; color:var(--accent);
+}
 .activity__note{
   margin:48px 0 0; padding-top:24px;
   border-top:1px solid var(--line);
@@ -230,6 +260,31 @@ a:hover{ color:var(--accent-dp); }
 .work__video iframe{
   width:100%; height:100%; border:0; display:block;
 }
+/* YouTubeサムネイル表示 → クリックで再生に切り替わる軽量埋め込み */
+.ytlite{
+  position:relative; display:block;
+  width:100%; height:100%; padding:0; margin:0;
+  border:0; background:var(--ink); cursor:pointer;
+}
+.ytlite__thumb{
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform .5s, opacity .3s;
+}
+.ytlite:hover .ytlite__thumb{ transform:scale(1.03); opacity:.9; }
+.ytlite__play{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:72px; height:50px; border-radius:12px;
+  background:rgba(39,34,32,.72);
+  transition:background-color .25s;
+}
+.ytlite__play::after{
+  content:""; position:absolute; left:50%; top:50%;
+  transform:translate(-42%,-50%);
+  border-style:solid; border-width:10px 0 10px 17px;
+  border-color:transparent transparent transparent #fffdfa;
+}
+.ytlite:hover .ytlite__play,
+.ytlite:focus-visible .ytlite__play{ background:#cc0000; }
 .work__caption{ margin-top:16px; font-size:13px; }
 .work__caption a{
   display:inline-flex; align-items:center; gap:8px;
@@ -348,16 +403,16 @@ a:hover{ color:var(--accent-dp); }
 
 /* ---------- contact (深紫紺の契約面) ---------- */
 .section--contact{ background:var(--dark); }
-.section__kicker--light{ color:#b9aef0; }
+.section__kicker--light{ color:#cfc6f7; }
 .section__title--light{ color:#fffdfa; }
-.section__lead--light{ color:rgba(255,253,250,.72); }
+.section__lead--light{ color:rgba(255,253,250,.93); }
 .contact__sns{
   margin:56px 0 0; padding:0; list-style:none;
   display:flex; gap:24px; flex-wrap:wrap;
 }
 .contact__sns a{
   display:flex; flex-direction:column; align-items:center; gap:12px;
-  color:rgba(255,253,250,.85);
+  color:rgba(255,253,250,.96);
   font-size:12px; letter-spacing:.14em;
 }
 .contact__sns a:hover{ color:#fffdfa; }
@@ -425,7 +480,8 @@ section[id]{ scroll-margin-top:72px; }
 @media (max-width: 768px){
   .sp-only{ display:inline; }
   .container{ padding-inline:24px; }
-  :root{ --header-h:64px; }
+  /* スマホは画面幅に最適化したサイズ(PCの150%固定は適用しない) */
+  :root{ --header-h:64px; --hero-type:clamp(34px, 9.2vw, 46px); }
 
   /* nav → overlay */
   .menu-btn{
@@ -459,8 +515,10 @@ section[id]{ scroll-margin-top:72px; }
   .hero__visual{ order:2; display:flex; justify-content:center; }
   .hero__panel{ width:min(78vw, 420px); }
   .hero__kicker{ margin-bottom:16px; font-size:11px; letter-spacing:.12em; }
-  .hero__catch{ font-size:clamp(38px, 11vw, 48px); margin-bottom:24px; }
-  .hero__name-main{ font-size:26px; }
+  .hero__catch{ margin-bottom:24px; }
+  .hero__sns{ gap:14px; }
+  .hero__sns a{ width:36px; height:36px; }
+  .hero__sns svg{ width:17px; height:17px; }
   .hero__lead{ font-size:14px; margin-bottom:32px; }
   .hero__cta .btn{ height:48px; padding:0 24px; font-size:13px; }
   .hero__foot{ width:calc(100% - 48px); }
@@ -494,8 +552,30 @@ section[id]{ scroll-margin-top:72px; }
 }
 
 @media (max-width: 390px){
-  .hero__catch{ font-size:36px; }
+  :root{ --hero-type:32px; }
   .hero__cta{ flex-direction:column; }
   .hero__cta .btn{ width:100%; }
+  .hero__sns{ gap:10px; }
   .sanpo__grid{ grid-template-columns:1fr; }
+}
+
+/* =====================================================
+   PC表示の基準倍率
+   ブラウザのズーム150%相当の見え方を「既定」として固定する。
+   画面幅に応じて倍率を落とし、レイアウトに必要な横幅(約890px以上)を確保する。
+   1024px以下(タブレット・スマホ)には適用せず、各幅の最適サイズを維持する。
+   ※ zoom は viewport 単位(svh)を割らないため、ヒーローの高さのみ倍率で補正する。
+   ===================================================== */
+/* min-width のみを積み上げる(max-width と併用すると端数幅で1pxの隙間ができるため) */
+@media (min-width: 1025px){
+  :root{ zoom:1.15; }
+  .hero{ min-height:calc(100svh / 1.15); }
+}
+@media (min-width: 1150px){
+  :root{ zoom:1.3; }
+  .hero{ min-height:calc(100svh / 1.3); }
+}
+@media (min-width: 1400px){
+  :root{ zoom:1.5; }
+  .hero{ min-height:calc(100svh / 1.5); }
 }

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>村越じゅんた 公式サイト デザイン提案(全11案)</title>
+<meta name="description" content="村越じゅんた公式サイトのデザイン提案ショーケース。11案をタブで切り替えて確認できます。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="村越じゅんた 公式サイト デザイン提案(全11案)">
+<meta property="og:description" content="11案をタブで切り替えて確認できます。">
+<meta property="og:image" content="https://yukinobu-nakamura.github.io/murakoshi-hp/assets/img/ogp.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/favicon-64.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf8f4; --panel:#fffdfa; --ink:#272220; --soft:#6f6862;
+  --accent:#5b48b5; --line:rgba(39,34,32,.14);
+}
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0; font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;
+  background:var(--bg); color:var(--ink);
+  display:flex; flex-direction:column;
+}
+.bar{
+  border-bottom:1px solid var(--line);
+  background:var(--bg);
+  flex-shrink:0;
+}
+.bar__top{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:14px 20px 10px;
+}
+.bar__title{ display:flex; flex-direction:column; gap:2px; min-width:0; }
+.bar__name{
+  font-family:"Zen Old Mincho",serif; font-weight:700; font-size:16px; letter-spacing:.08em;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.bar__sub{ font-size:10px; letter-spacing:.18em; color:var(--soft); }
+.dev{ display:flex; gap:0; border:1px solid var(--line); border-radius:999px; overflow:hidden; flex-shrink:0; }
+.dev button{
+  border:0; background:transparent; padding:7px 16px;
+  font:inherit; font-size:12px; letter-spacing:.08em; color:var(--soft); cursor:pointer;
+}
+.dev button.is-on{ background:var(--accent); color:#fffdfa; }
+.tabs{
+  display:flex; gap:6px; padding:0 20px 12px;
+  overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:thin;
+}
+.tab{
+  flex-shrink:0;
+  border:1px solid var(--line); border-radius:999px;
+  background:var(--panel); color:var(--ink);
+  padding:7px 14px; font:inherit; font-size:12px; letter-spacing:.04em; cursor:pointer;
+  transition:border-color .2s, background-color .2s, color .2s;
+  white-space:nowrap;
+}
+.tab:hover{ border-color:var(--accent); color:var(--accent); }
+.tab.is-on{ background:var(--accent); border-color:var(--accent); color:#fffdfa; }
+.tab .no{ font-weight:700; margin-right:5px; }
+.tab .star{ margin-left:5px; font-size:10px; opacity:.85; }
+.stage{
+  flex:1; min-height:0;
+  display:flex; justify-content:center;
+  background:#efece6;
+}
+.stage iframe{
+  border:0; width:100%; height:100%; background:#fff; display:block;
+  transition:width .3s;
+}
+.stage.is-sp{ padding:16px 0; }
+.stage.is-sp iframe{
+  width:390px; max-width:calc(100vw - 32px);
+  border:1px solid var(--line); border-radius:16px;
+  box-shadow:0 8px 40px rgba(39,34,32,.12);
+}
+.note{
+  flex-shrink:0; border-top:1px solid var(--line);
+  padding:8px 20px; font-size:10.5px; color:var(--soft); letter-spacing:.03em;
+  background:var(--bg);
+}
+@media (max-width:768px){
+  .bar__top{ padding:12px 16px 8px; }
+  .tabs{ padding:0 16px 10px; }
+  .note{ display:none; }
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar__top">
+    <div class="bar__title">
+      <span class="bar__name">村越じゅんた 公式サイト — デザイン提案</span>
+      <span class="bar__sub">MURAKOSHI JUNTA / DESIGN SHOWCASE (11 PATTERNS)</span>
+    </div>
+    <div class="dev" role="group" aria-label="表示幅の切り替え">
+      <button type="button" id="devPc" class="is-on">PC</button>
+      <button type="button" id="devSp">スマホ</button>
+    </div>
+  </div>
+  <nav class="tabs" id="tabs" aria-label="デザイン案の切り替え"></nav>
+</header>
+
+<main class="stage" id="stage">
+  <iframe id="frame" title="デザイン案プレビュー" src="patterns/pattern-00.html"></iframe>
+</main>
+
+<p class="note">タブでデザイン案を切り替え、「スマホ」でモバイル幅の表示を確認できます。各案の文言・写真・注記は共通(legal-officerレビュー済み)で、レイアウトのみ異なります。</p>
+
+<script>
+(function(){
+  'use strict';
+  var PATTERNS = [
+    { no:'01', name:'Purple Premium',  file:'pattern-01.html' },
+    { no:'02', name:'Corporate Navy',  file:'pattern-02.html' },
+    { no:'03', name:'Minimal Mono',    file:'pattern-03.html' },
+    { no:'04', name:'Warm Sincere',    file:'pattern-00.html', star:true },
+    { no:'05', name:'Editorial',       file:'pattern-05.html' },
+    { no:'06', name:'Civic Blue',      file:'pattern-06.html' },
+    { no:'07', name:'Passion Red',     file:'pattern-07.html' },
+    { no:'08', name:'和モダン',         file:'pattern-08.html' },
+    { no:'09', name:'Soft Pastel',     file:'pattern-09.html' },
+    { no:'10', name:'Fresh Green',     file:'pattern-10.html' },
+    { no:'11', name:'Lavender Tech',   file:'pattern-11.html' }
+  ];
+  var tabs = document.getElementById('tabs');
+  var frame = document.getElementById('frame');
+  var stage = document.getElementById('stage');
+  var devPc = document.getElementById('devPc');
+  var devSp = document.getElementById('devSp');
+
+  PATTERNS.forEach(function(p){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'tab';
+    b.dataset.file = p.file;
+    b.dataset.no = p.no;
+    b.innerHTML = '<span class="no">' + p.no + '</span>' + p.name + (p.star ? '<span class="star">★本命</span>' : '');
+    b.addEventListener('click', function(){ select(p.no, true); });
+    tabs.appendChild(b);
+  });
+
+  function select(no, pushHash){
+    var p = PATTERNS.find(function(x){ return x.no === no; }) || PATTERNS[3];
+    [].forEach.call(tabs.children, function(t){ t.classList.toggle('is-on', t.dataset.no === p.no); });
+    var next = 'patterns/' + p.file;
+    if (frame.getAttribute('src') !== next) frame.setAttribute('src', next);
+    if (pushHash) history.replaceState(null, '', '#p' + p.no);
+    document.title = '【' + p.no + ' ' + p.name + '】村越じゅんた 公式サイト デザイン提案';
+  }
+
+  devPc.addEventListener('click', function(){
+    stage.classList.remove('is-sp');
+    devPc.classList.add('is-on'); devSp.classList.remove('is-on');
+  });
+  devSp.addEventListener('click', function(){
+    stage.classList.add('is-sp');
+    devSp.classList.add('is-on'); devPc.classList.remove('is-on');
+  });
+
+  var m = location.hash.match(/^#p(\d{2})$/);
+  select(m ? m[1] : '04', false);
+})();
+</script>
+</body>
+</html>

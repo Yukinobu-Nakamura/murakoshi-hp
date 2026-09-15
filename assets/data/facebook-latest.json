@@ -1,0 +1,6 @@
+{
+  "_readme": "ACTIVITYセクションに表示するFacebook最新投稿3件。tools/update_facebook_feed.py が自動で書き換える。posts が空の間は index.html に書かれた既定の3カードがそのまま表示される(表示は崩れない)。",
+  "updated": null,
+  "source": "https://www.facebook.com/JuntaMurakoshi",
+  "posts": []
+}

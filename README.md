@@ -1,20 +1,56 @@
-# 村越じゅんた 公式サイト — デザイン提案(全11案)
+# 村越じゅんた 公式サイト
 
 作成: 2026-09-14 / 発注: 中村さん(再生の道つながりの制作依頼・本人承諾済み)
-**公開URL(ショーケース)**: https://yukinobu-nakamura.github.io/murakoshi-hp/
+**採用案: 04 Warm Sincere**(2026-09-15 決定。ルート index.html を本案に差し替え済み)
+**公開URL**: https://yukinobu-nakamura.github.io/murakoshi-hp/
 
 ## 構成
 ```
-index.html              … ショーケース(11案タブ切替+PC/スマホ幅トグル)。初期表示=04本命
-patterns/pattern-00.html … ★本命「04 Warm Sincere」(現行案。外部CSS/JS参照の本番構成)
+index.html              … ★本サイト(採用案04)。showcase.html から昇格
+showcase.html           … 旧ショーケース(11案タブ切替+PC/スマホ幅トグル)。比較用に保存
+patterns/pattern-00.html … 04案の提案時ファイル(index.html と同内容・相対パスのみ差異)
 patterns/pattern-01〜11.html … 残り10案(単一HTML自己完結。04は欠番=pattern-00が04枠)
-assets/css/style.css    … 本命案のCSS(デザイントークン+レスポンシブ)
-assets/js/main.js       … 本命案のJS(依存ゼロ)
+assets/css/style.css    … CSS(デザイントークン+レスポンシブ+PC基準倍率)
+assets/js/main.js       … JS(依存ゼロ。FBフィード取込・YouTubeサムネ再生を含む)
 assets/img/             … WebP画像(全て本人SNS由来+favicon/OGPは生成)
+assets/img/fb/          … Facebook投稿写真(更新スクリプトが自動保存)
+assets/data/facebook-latest.json … ACTIVITY表示用のFB最新投稿3件
+tools/update_facebook_feed.py … 上記JSONを Graph API から更新するスクリプト
 CONTENT_SPEC_MURAKOSHI_C1.md … 文言・素材・法務対応の正本
 PATTERNS_SPEC.md        … 11案制作の共通仕様(文言固定・禁止語・検収基準)
 _sources/               … 元画像(git管理外)
 ```
+
+## 2026-09-15 の修正(中村さん指示・8項目)
+1. 「府中に、むちゅう。」と「村越じゅんた」を同一サイズに統一(`--hero-type` で一元管理)
+2. PC表示をブラウザズーム150%相当に固定(`:root{zoom}` を画面幅で段階適用。1024px以下は従来どおり各幅最適)
+3. ACTIVITY を Facebook 最新投稿3件の自動表示に変更(下記「Facebook連携」参照)
+4. PROFESSION の動画を、再生の道公式の紹介動画サムネイル表示 → クリックで再生に変更
+5. 本文のサブテキスト色を濃く(`--ink-soft` #6f6862 → #4e4741。コントラスト比 約7.8:1)
+6. 「家電寄贈の、お願い。」→「寄贈のお願い。」(ナビ・本文・フッターの全4箇所)
+7. SNSアイコンをヒーロー(バナー)の「村越じゅんた」の隣に追加
+8. フッターの「掲載の写真は本人のSNSで公開したものを…」の一文を削除
+
+### 検証(2026-09-15)
+- 画面幅 360/390/768/1024/1025/1149/1150/1398/1399/1400/1600/1920/2560 で横オーバーフロー **0**
+- 見出しと氏名のフォントサイズ一致を全幅で機械確認、倍率の切替に隙間なし(min-width積み上げ方式)
+- YouTubeサムネ→iframe差し替えの動作確認済み / コンソールエラー 0
+- FBフィードは実データを投入して3カードの描画・日付・リンク・画像読込を確認後、空に戻した
+
+## Facebook連携(ACTIVITY)
+`assets/data/facebook-latest.json` の `posts` を読んで3カードを描画する。
+取得できない場合は index.html に書かれた既定の3カードをそのまま表示するため、**表示が崩れることはない**。
+
+```bash
+export FB_PAGE_ID="＜FacebookページID＞"
+export FB_ACCESS_TOKEN="＜長期ページアクセストークン＞"
+python3 tools/update_facebook_feed.py     # 写真をDLしJSONを更新
+```
+
+⚠️ **前提の確認が必要**: Graph API で投稿一覧を取得できるのは「Facebookページ」だけ。
+村越さんの https://www.facebook.com/JuntaMurakoshi が個人プロフィールの場合、
+API では取得できないため、(a) Facebookページを作る (b) JSONを手で更新する
+(c) 公式の埋め込みプラグインに差し替える のいずれかを選ぶ必要がある。
 
 ## 11案の検収記録(2026-09-14)
 - 全11ファイルで機械検収 ALL PASS: 禁止語0・必須注記2種完全一致・noindex・絵文字0・外部ドメイン正常
@@ -42,8 +78,13 @@ _sources/               … 元画像(git管理外)
 
 ## ⚠️ 公開前の残確認(村越さん本人へ)
 1. **写真の著作権**: ポートレート(スタジオ撮影と思われる)と清掃写真(他者撮影の可能性)の撮影者・許諾状況の確認
+   - 2026-09-15、中村さん指示によりフッターの「掲載の写真は本人のSNSで公開したものを本人の承諾のもと使用しています。」を削除した。
+     PATTERNS_SPEC.md §1 では必須注記としていた一文なので、**この項目の確認は従来よりも重要度が上がっている**。
 2. 会社の登記上の地位の確認(「設立に加わり、取締役として」の表記で整合させたが、代表取締役なら表記を戻せる)
 3. 公開ドメイン・サーバーの決定(OGPのog:image/og:urlを絶対URLに更新すること)
+4. **noindex の解除**: index.html は現在も `<meta name="robots" content="noindex, nofollow">` のまま。
+   検索に載せる段階で外す(今回は指示範囲外のため触っていない)。
+5. **Facebookの種別**(ページ or 個人プロフィール)の確認 → 上記「Facebook連携」の方式決定
 
 ## プレビュー
 ローカル: `python3 -m http.server 8749` → http://127.0.0.1:8749/
