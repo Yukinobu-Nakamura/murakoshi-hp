@@ -109,16 +109,39 @@ python3 tools/update_facebook_feed.py     # 写真をDLしJSONを更新
 - **こちらの担当はステージングまで**。GitHub Pages に置いた版を村越さん側が確認する。
 - **本番サーバーへのアップは村越じゅんた氏ならびにその後援会組織が実施**。DNS・サーバー契約には関与しない。
 
-## 本番アップ時の引き継ぎ(村越さん・後援会側の作業)
-1. **noindex を外す** — `index.html` 6行目の
-   `<meta name="robots" content="noindex, nofollow">` を**削除**する。
-   これは「検索エンジンに登録しないで」という指示タグで、ステージング版が
-   Google等に載って本番と二重に表示されるのを防ぐために入れてある。本番では必ず外す。
-2. **OGP を本番の絶対URLにする** — `og:image` と `og:url` を
-   `https://本番ドメイン/assets/img/ogp.png` のような絶対URLに書き換える
-   (SNSでシェアしたときのサムネイル表示に必要)。
-3. ファイル一式(`index.html` + `assets/`)をサーバーの公開ディレクトリへアップ。
-   `showcase.html` `patterns/` `tools/` `_sources/` `*.md` は**本番不要**。
+## 本番公開の構成(2026-10-12 整備)
+
+本番環境が確定したため、**手作業のアップロードは不要**になった。master への push で
+さくらのレンタルサーバへ自動デプロイされる。
+
+| 項目 | 確定値 |
+|---|---|
+| 本番ドメイン | `junta-murakoshi.jp` |
+| 初期ドメイン | `junta-murakoshi.sakura.ne.jp` |
+| Web公開フォルダ | `~/www/seiji` → `/home/junta-murakoshi/www/seiji/` |
+| デプロイ | `.github/workflows/deploy-production.yml`(master push / 手動実行) |
+| ステージング | GitHub Pages(`staging` ブランチを配信する想定) |
+
+### 自動化した処理
+- **noindex の自動解除** — リポジトリ上は `noindex` を**付けたまま**にする(ステージングを検索に出さないため)。
+  デプロイ直前に workflow が削除し、本番にだけ検索許可の版が上がる。残存していたらエラーで中止する。
+- **OGP の絶対URL化** — `canonical` / `og:url` / `og:image` を `https://junta-murakoshi.jp/` 基準で記述済み。
+- **正規URLへの統一** — `.htaccess` で http / www付き / 初期ドメイン経由 の3経路を本番URLへ301転送。
+  特に `https://junta-murakoshi.sakura.ne.jp/seiji/` での重複露出を塞ぐことが目的。
+- **公開後の自動チェック** — デプロイ後に HTTPステータス・noindex残存・本文の有無を workflow が検査する。
+
+### 本番に上げないもの(workflow の exclude で除外)
+`showcase.html` / `patterns/` / `tools/` / `docs/` / `.github/` / `_sources/` / `*.md`
+
+### 村越さん側の作業
+`docs/SETUP_GUIDE_C1.html`(A4 33ページ・PDF同梱)の STEP 4〜14。
+さくらの管理画面操作と GitHub の Secrets 登録のみで、**中村はサーバーの認証情報を受け取らない**。
+
+### 進捗(2026-10-12 時点)
+- ✅ STEP 2 独自ドメイン追加 / ✅ STEP 3 Web公開フォルダ(`~/www/seiji`)
+- ✅ ネームサーバーは正しくさくらを指している(外部から確認済み。www も同一IP)
+- ❌ **STEP 4 無料SSL が未実施** — 管理画面のSSL欄が「-」。現在の課題
+- ⚠️ 有料SSL(さくらのSSL ドメイン認証型)は**不要**。購入しないよう手順書に明記済み
 
 ## ⚠️ 残確認(村越さん本人へ)
 1. 会社の登記上の地位の確認(「設立に加わり、取締役として」の表記で整合させたが、代表取締役なら表記を戻せる)
