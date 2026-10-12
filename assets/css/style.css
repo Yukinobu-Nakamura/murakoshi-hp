@@ -404,8 +404,10 @@ a:hover{ color:var(--accent-dp); }
   padding:64px;
 }
 .reuse__text{ margin:0 0 40px; font-size:15px; }
-.reuse__actions{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:24px; }
+.reuse__actions{ display:flex; gap:16px; flex-wrap:wrap; }
 .reuse__note{ margin:0; font-size:12px; color:var(--ink-soft); }
+/* 打ち消し注記はCTAボタンより前に置く(政治献金と誤認されないため)。間隔を確保する */
+.reuse__note + .reuse__actions{ margin-top:20px; }
 
 /* ---------- contact (深紫紺の契約面) ---------- */
 .section--contact{ background:var(--dark); }

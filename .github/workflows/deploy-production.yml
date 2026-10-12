@@ -5,11 +5,23 @@ name: 本番デプロイ（さくら）
 # 未設定のうちは何もせずスキップするので、放置してもエラーにはならない。
 #
 # 設定手順: docs/SETUP_GUIDE_C1.html の STEP 10 / STEP 11 を参照。
+#
+# ■ 初回に必ず実施すること
+#   1. 「dry_run」にチェックを入れて手動実行し、接続・証明書検証・アップロード対象を確認する
+#      （1ファイルも書き込まずにログだけ出る）
+#   2. 問題なければ dry_run を外して本実行する
+#   ※ 初回デプロイは「前回アップロード分の記録」が無いため、サーバー上に残っている
+#      古いファイルは削除されない。公開フォルダは事前に空にしておくこと。
 
 on:
   push:
     branches: [master]
-  workflow_dispatch:        # Actions タブから手動実行も可
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: '本番に書き込まず、接続とアップロード対象の確認だけ行う'
+        type: boolean
+        default: false
 
 concurrency:
   group: deploy-production
@@ -48,32 +60,65 @@ jobs:
             echo "::notice::SAKURA_FTP_HOST / USER / PASS が未設定のためスキップしました（docs/SETUP_GUIDE_C1.html の STEP 10 を参照）"
           fi
 
+      # ──────────────────────────────────────────────────────────
+      # ★ 安全装置：独自ドメインのHTTPSが成立していない状態でデプロイすると、
+      #   .htaccess の301転送によって「証明書が無いURL」へ全経路が飛ばされ、
+      #   サイトを確認する手段が1つも残らなくなる。先に生死を確認して止める。
+      # ──────────────────────────────────────────────────────────
+      - name: 本番SSLが有効か確認（未発行なら中止）
+        if: steps.cfg.outputs.ready == 'true' && inputs.dry_run != true
+        run: |
+          if ! curl -sS --max-time 25 -o /dev/null "$SITE_URL"; then
+            echo "::error::独自ドメインのHTTPSが成立していません。この状態でデプロイすると .htaccess の301転送で全URLが到達不能になるため中止しました。さくらのコントロールパネルで無料SSLを発行してから再実行してください（docs/SETUP_GUIDE_C1.html の STEP 4）"
+            exit 1
+          fi
+          echo "本番HTTPSの疎通を確認しました"
+
       - name: 本番用に検索除け（noindex）を解除
         if: steps.cfg.outputs.ready == 'true'
         run: |
           # リポジトリ上は常に noindex を付けておき（＝ステージングは検索に出ない）、
           # 本番へ上げるこの瞬間にだけ外す。これで本番とステージングの二重掲載を防ぐ。
-          sed -i '/<meta name="robots" content="noindex, nofollow">/d' index.html
-          if grep -qi 'noindex' index.html; then
-            echo "::error::index.html に noindex が残っています。デプロイを中止しました。"
-            exit 1
-          fi
-          echo "index.html の noindex を解除しました"
+          # 「ちょうど1個あったものを1個消した」ことまで検証し、想定外なら必ず止める。
+          python3 - <<'PY'
+          import re, sys
+          path = 'index.html'
+          src = open(path, encoding='utf-8').read()
+          new, n = re.subn(r'[ \t]*<meta\s+name=["\']robots["\'][^>]*>[ \t]*\n?', '', src, flags=re.I)
+          if n != 1:
+              sys.exit(f'::error::robots の meta タグが {n} 個見つかりました（想定は1個）。index.html の記述を確認してください')
+          if re.search(r'name=["\']robots["\']', new, re.I):
+              sys.exit('::error::robots の meta タグが残っています')
+          if re.search(r'noindex|content=["\']none["\']', new, re.I):
+              sys.exit('::error::検索除けの指定が残っています（noindex もしくは content="none"）')
+          open(path, 'w', encoding='utf-8').write(new)
+          print('index.html の検索除けを1件解除しました')
+          PY
 
       - name: さくらへ FTPS でアップロード
         if: steps.cfg.outputs.ready == 'true'
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
-          # ★ ホスト名は必ず初期ドメイン（xxxxx.sakura.ne.jp）。
-          #    独自ドメインを指定すると TLS 証明書エラーで必ず失敗する。
+          # ★ ホスト名は必ず初期ドメイン（〇〇〇.sakura.ne.jp）。
+          #    さくらのFTPS証明書は *.sakura.ne.jp 向けに発行されているため、
+          #    下の security: strict と組み合わせると、独自ドメインを指定した場合は
+          #    証明書の検証に失敗してデプロイが止まる（＝誤設定が検出できる）。
           server:   ${{ secrets.SAKURA_FTP_HOST }}
           username: ${{ secrets.SAKURA_FTP_USER }}
           password: ${{ secrets.SAKURA_FTP_PASS }}
           protocol: ftps          # さくらは「明示的な TLS」／ポート21
           port: 21
-          server-dir: /home/junta-murakoshi/www/seiji/
+          # ★ strict にしないとTLS証明書を検証しない（このActionの既定は loose）。
+          #    検証なしだと、経路上の攻撃者にサーバーパスワードを渡しうる。
+          #    さくらのパスワードはコントロールパネルのログインと同一のため影響が大きい。
+          #    もし証明書チェーンの都合で strict が通らない場合は、loose に戻したうえで
+          #    「いつ・なぜ戻したか」をこのコメントに必ず書き残すこと。
+          security: strict
+          server-dir: ${{ env.SERVER_DIR }}
           local-dir: ./
           dangerous-clean-slate: false
+          dry-run: ${{ inputs.dry_run == true }}
+          log-level: ${{ inputs.dry_run == true && 'verbose' || 'standard' }}
           exclude: |
             **/.git*
             **/.git*/**
@@ -88,20 +133,26 @@ jobs:
             **/node_modules/**
 
       - name: 公開後の自動チェック
-        if: steps.cfg.outputs.ready == 'true'
-        continue-on-error: true   # ここで失敗してもデプロイ自体は成功扱いにする
+        if: steps.cfg.outputs.ready == 'true' && inputs.dry_run != true
         run: |
           sleep 10
           code=$(curl -sS -o /tmp/body.html -w "%{http_code}" --max-time 25 -L "$SITE_URL" || echo "000")
           echo "HTTPステータス: $code"
+          fail=0
           if [ "$code" != "200" ]; then
-            echo "::warning::本番URLが 200 を返していません（SSL未発行・DNS・.htaccess の順に確認してください）"
+            echo "::error::本番URLが 200 を返していません（code=$code）。リダイレクトループ・SSL・.htaccess の順に確認してください"
+            fail=1
           fi
           if grep -qi 'noindex' /tmp/body.html 2>/dev/null; then
-            echo "::warning::本番ページに noindex が残っています"
+            echo "::error::本番ページに noindex が残っています"
+            fail=1
           fi
-          if grep -q '村越じゅんた' /tmp/body.html 2>/dev/null; then
-            echo "本文の確認: OK"
-          else
-            echo "::warning::本文が想定と異なります（アップロード先フォルダが違う可能性）"
+          if ! grep -q '村越じゅんた' /tmp/body.html 2>/dev/null; then
+            echo "::error::本文が想定と異なります（アップロード先フォルダが違う可能性）"
+            fail=1
           fi
+          if [ "$fail" -ne 0 ]; then
+            echo "::error::公開後チェックに失敗しました。本番サイトが正常に表示されていない可能性があります"
+            exit 1
+          fi
+          echo "公開後チェック: すべて正常"

@@ -67,6 +67,18 @@
     });
   }
 
+  /* ---------- YouTube: サムネイルの読み込み失敗時に低解像度へ切り替える ----------
+     以前は index.html のインライン onerror で処理していたが、
+     CSP で script-src 'self' を使えるようにするため JS 側へ移した。 */
+  Array.prototype.forEach.call(document.querySelectorAll('.ytlite__thumb'), function (img) {
+    img.addEventListener('error', function onThumbError() {
+      img.removeEventListener('error', onThumbError);
+      var holder = img.closest ? img.closest('.ytlite') : null;
+      var id = holder && holder.getAttribute('data-yt-id');
+      if (id) img.src = 'https://i.ytimg.com/vi/' + encodeURIComponent(id) + '/hqdefault.jpg';
+    });
+  });
+
   /* ---------- YouTube: サムネイル表示 → クリックで再生 ---------- */
   Array.prototype.forEach.call(document.querySelectorAll('.ytlite'), function (btn) {
     btn.addEventListener('click', function () {
@@ -109,20 +121,31 @@
       ('0' + d.getDate()).slice(-2);
   }
 
+  /* JSONを手編集する運用も想定されるため、http(s) 以外のスキームは受け付けない
+     （javascript: が入るとクリックでスクリプトが走るため） */
+  function safeHttpUrl(value, fallback) {
+    try {
+      var u = new URL(value, location.href);
+      return (u.protocol === 'https:' || u.protocol === 'http:') ? u.href : fallback;
+    } catch (e) {
+      return fallback;
+    }
+  }
+
   function buildCard(post) {
     var article = document.createElement('article');
     article.className = 'card';
 
     var link = document.createElement('a');
     link.className = 'card__link';
-    link.href = post.permalink || fbCards.getAttribute('data-fb-page') || '#';
+    link.href = safeHttpUrl(post.permalink, fbCards.getAttribute('data-fb-page') || '#');
     link.target = '_blank';
     link.rel = 'noopener';
 
     var figure = document.createElement('figure');
     figure.className = 'card__media';
     var img = document.createElement('img');
-    img.src = post.image;
+    img.src = safeHttpUrl(post.image, 'assets/img/act_shrine.webp');
     img.loading = 'lazy';
     img.setAttribute('referrerpolicy', 'no-referrer');
     img.alt = post.alt || 'Facebookに投稿された村越じゅんたの活動写真';

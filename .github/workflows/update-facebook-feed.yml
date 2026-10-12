@@ -3,11 +3,24 @@ name: Facebook最新投稿の取り込み
 # ACTIVITY セクション用に、Facebookページの最新投稿3件を取得して
 # assets/data/facebook-latest.json と assets/img/fb/ を更新する。
 # Secrets(FB_PAGE_ID / FB_ACCESS_TOKEN)が未設定のうちは何もせずスキップする。
+#
+# ■ 重要：本番（master）ではなく staging ブランチに反映する
+#   Facebookの投稿をそのまま公開サイトへ自動転載すると、
+#     ・リンクシェア投稿に含まれる第三者の画像を自サーバーへ複製してしまう
+#     ・写真に第三者が写り込んでいても誰も確認しないまま公開される
+#     ・選挙に関わる語が入っても誰も確認しないまま公開される
+#   という問題が起きる（2026-10-12 legal-officer レビュー指摘）。
+#   そのため取り込み先を staging に固定し、
+#   「確認用ページで目視 → staging から master へのマージを人が承認 → 本番反映」
+#   という流れを必ず通す。この workflow が本番を直接書き換えることはない。
+#
+#   なお取得側（tools/update_facebook_feed.py）でも、
+#   写真つきの自前投稿だけに絞り、リンクシェアや他者投稿のシェアは除外している。
 
 on:
   schedule:
     - cron: '0 21 * * *'   # 毎日 06:00 JST (UTC 21:00)
-  workflow_dispatch:        # 手動実行も可
+  workflow_dispatch:        # 手動実行も可（投稿直後に反映したいとき）
 
 permissions:
   contents: write
@@ -22,6 +35,8 @@ jobs:
     steps:
       - name: リポジトリを取得
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Secrets の設定有無を確認
         id: cfg
@@ -36,21 +51,38 @@ jobs:
             echo "::notice::FB_PAGE_ID / FB_ACCESS_TOKEN が未設定のためスキップしました(READMEの手順を参照)"
           fi
 
-      - name: Python を用意
+      - name: staging ブランチの有無を確認
+        id: br
         if: steps.cfg.outputs.ready == 'true'
+        run: |
+          if git ls-remote --exit-code --heads origin staging >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::staging ブランチが存在しないためスキップしました。確認用ブランチを作ってから実行してください（docs/SETUP_GUIDE_C1.html の STEP 12）"
+          fi
+
+      - name: staging ブランチに切り替え
+        if: steps.cfg.outputs.ready == 'true' && steps.br.outputs.exists == 'true'
+        run: |
+          git fetch origin staging
+          git checkout -B staging origin/staging
+
+      - name: Python を用意
+        if: steps.cfg.outputs.ready == 'true' && steps.br.outputs.exists == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
       - name: 最新投稿を取得して JSON を更新
-        if: steps.cfg.outputs.ready == 'true'
+        if: steps.cfg.outputs.ready == 'true' && steps.br.outputs.exists == 'true'
         env:
           FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
           FB_ACCESS_TOKEN: ${{ secrets.FB_ACCESS_TOKEN }}
         run: python3 tools/update_facebook_feed.py
 
-      - name: 変更があればコミットして push
-        if: steps.cfg.outputs.ready == 'true'
+      - name: 変更があれば staging にコミットして push
+        if: steps.cfg.outputs.ready == 'true' && steps.br.outputs.exists == 'true'
         run: |
           if [ -z "$(git status --porcelain assets/data/facebook-latest.json assets/img/fb)" ]; then
             echo "変更なし。コミットしません。"
@@ -59,5 +91,6 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add assets/data/facebook-latest.json assets/img/fb
-          git commit -m "chore: ACTIVITYのFacebook最新投稿を更新"
-          git push
+          git commit -m "chore: ACTIVITYのFacebook最新投稿を更新（確認用。本番反映には master へのマージが必要）"
+          git push origin staging
+          echo "::notice::staging を更新しました。確認用ページで内容を確認し、問題なければ master へマージしてください（写真の写り込み・文面を必ず目視確認すること）"
