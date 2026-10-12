@@ -1,0 +1,71 @@
+# ============================================================
+#  村越じゅんた 公式サイト — Apache 設定（さくらのレンタルサーバ用）
+#  本番ドメイン: junta-murakoshi.jp
+#
+#  このファイルは GitHub の master ブランチで管理し、自動デプロイで反映される。
+#  サーバー上で直接編集しないこと（次回デプロイで上書きされる）。
+#
+#  ⚠️ さくらコントロールパネルの「HTTPSに転送する」は OFF のままにすること。
+#     両方で転送を設定すると二重リダイレクトになるため、ここに一本化する。
+#
+#  ⚠️ 万一このファイルが原因でサイト全体が 500 エラーになった場合：
+#     GitHub 上でこのファイルを削除して再デプロイすれば 30 秒で復旧できる。
+#     （サーバーにログインする必要はない）
+# ============================================================
+
+# --- 1) 正規URLへの統一（https + wwwなし + 本番ドメイン） ---
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# SSL証明書の自動更新用パスは転送の対象外にする
+RewriteRule ^\.well-known/ - [L]
+
+# 次のいずれかに当てはまるアクセスを https://junta-murakoshi.jp/ へ 301 転送する
+#   ・http でのアクセス
+#   ・www.junta-murakoshi.jp でのアクセス
+#   ・初期ドメイン junta-murakoshi.sakura.ne.jp/seiji/ でのアクセス
+# （同じ内容が複数のURLで見える状態＝重複コンテンツを防ぎ、検索評価を1本に集約する）
+RewriteCond %{HTTPS} !^on$ [OR]
+RewriteCond %{HTTP_HOST} !^junta-murakoshi\.jp$ [NC]
+RewriteRule ^(.*)$ https://junta-murakoshi.jp/$1 [R=301,L]
+</IfModule>
+
+# --- 2) カスタムエラーページ ---
+ErrorDocument 404 /404.html
+
+# --- 3) セキュリティヘッダ ---
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+  # HSTS（https以外での接続をブラウザ側に禁止させる設定）
+  # ⚠️ SSLが安定して動くことを確認してから、先頭の # を外して有効化すること。
+  #    先に入れると、万一SSLが切れたときにブラウザがアクセスを拒否し、復旧が難しくなる。
+  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# --- 4) 公開不要なファイルの遮断 ---
+# （デプロイ対象から除外済みだが、取りこぼしに備えた二重の防御）
+<IfModule mod_authz_core.c>
+  <FilesMatch "\.(md|yml|yaml|py|sh|bak|log)$">
+    Require all denied
+  </FilesMatch>
+  <FilesMatch "^(\.htaccess|\.gitignore|README|LICENSE)">
+    Require all denied
+  </FilesMatch>
+</IfModule>
+
+# --- 5) 静的ファイルのキャッシュ ---
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css                "access plus 7 days"
+  ExpiresByType application/javascript  "access plus 7 days"
+  ExpiresByType image/webp              "access plus 30 days"
+  ExpiresByType image/png               "access plus 30 days"
+  ExpiresByType image/jpeg              "access plus 30 days"
+  # HTML と JSON はキャッシュしない（更新が即座に反映されるように）
+  ExpiresByType text/html               "access plus 0 seconds"
+  ExpiresByType application/json        "access plus 0 seconds"
+</IfModule>
