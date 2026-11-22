@@ -3,3 +3,8 @@ _sources/
 .DS_Store
 __pycache__/
 *.pyc
+
+# 引き渡し文書(実質_C2: 接続先ホスト名/FTPアカウント名/公開フォルダ絶対パスを含む)
+# 公開リポジトリには置かない。村越さんへはDrive経由で個別に渡す
+# 保管先: Drive 20_Seimu/23_TokyoOthers/府中市/05_村越HP_引き渡し資料_C2/
+docs/

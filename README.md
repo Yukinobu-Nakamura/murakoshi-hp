@@ -117,8 +117,8 @@ python3 tools/update_facebook_feed.py     # 写真をDLしJSONを更新
 | 項目 | 確定値 |
 |---|---|
 | 本番ドメイン | `junta-murakoshi.jp` |
-| 初期ドメイン | `junta-murakoshi.sakura.ne.jp` |
-| Web公開フォルダ | `~/www/seiji` → `/home/junta-murakoshi/www/seiji/` |
+| 初期ドメイン | `〇〇〇.sakura.ne.jp`（実値は Drive の引き渡し資料を参照） |
+| Web公開フォルダ | `~/www/seiji`（絶対パスは Drive の引き渡し資料を参照） |
 | デプロイ | `.github/workflows/deploy-production.yml`(master push / 手動実行) |
 | ステージング | GitHub Pages(`staging` ブランチを配信する想定) |
 
@@ -127,7 +127,7 @@ python3 tools/update_facebook_feed.py     # 写真をDLしJSONを更新
   デプロイ直前に workflow が削除し、本番にだけ検索許可の版が上がる。残存していたらエラーで中止する。
 - **OGP の絶対URL化** — `canonical` / `og:url` / `og:image` を `https://junta-murakoshi.jp/` 基準で記述済み。
 - **正規URLへの統一** — `.htaccess` で http / www付き / 初期ドメイン経由 の3経路を本番URLへ301転送。
-  特に `https://junta-murakoshi.sakura.ne.jp/seiji/` での重複露出を塞ぐことが目的。
+  特に初期ドメイン経由での重複露出を塞ぐことが目的。
 - **公開後の自動チェック** — デプロイ後に HTTPステータス・noindex残存・本文の有無を workflow が検査する。
 
 ### 本番に上げないもの(workflow の exclude で除外)

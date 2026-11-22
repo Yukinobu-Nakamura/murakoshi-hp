@@ -34,7 +34,7 @@ RewriteEngine On
 RewriteRule ^\.well-known/ - [L]
 
 # (1) ホスト名の正規化
-#     www付き / 初期ドメイン経由(junta-murakoshi.sakura.ne.jp/seiji/) / IP直打ち
+#     www付き / 初期ドメイン経由 / IP直打ち
 #     → すべて https://junta-murakoshi.jp/ へ
 #     ※ %{REQUEST_URI} ではなく $1 を使う。.htaccess のあるディレクトリからの
 #        相対パスで照合されるため、初期ドメイン経由の /seiji/... も正しい位置に着地する。
