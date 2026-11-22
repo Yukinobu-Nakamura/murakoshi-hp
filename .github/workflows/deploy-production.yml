@@ -31,10 +31,10 @@ permissions:
   contents: read
 
 env:
-  # ★ さくらの「Web公開フォルダ」のフルパス（末尾の / まで必要）
-  #    コントロールパネルの ドメイン/SSL 一覧で確認できる値に合わせること。
-  #    現在の設定: ~/www/seiji  →  /home/junta-murakoshi/www/seiji/
-  SERVER_DIR: /home/junta-murakoshi/www/seiji/
+  # ★ 公開フォルダのフルパスは Secrets で渡す（SAKURA_FTP_DIR）。
+  #    パスに FTPアカウント名が含まれるため、公開リポジトリに直書きしない。
+  #    値はコントロールパネルの ドメイン/SSL 一覧で確認でき、末尾の / まで必要。
+  #    例: /home/〇〇〇/www/seiji/  （実値は Drive の引き渡し資料を参照）
   # ★ 公開後の自動チェックに使う本番URL
   SITE_URL: https://junta-murakoshi.jp/
 
@@ -52,12 +52,13 @@ jobs:
           H: ${{ secrets.SAKURA_FTP_HOST }}
           U: ${{ secrets.SAKURA_FTP_USER }}
           P: ${{ secrets.SAKURA_FTP_PASS }}
+          D: ${{ secrets.SAKURA_FTP_DIR }}
         run: |
-          if [ -n "$H" ] && [ -n "$U" ] && [ -n "$P" ]; then
+          if [ -n "$H" ] && [ -n "$U" ] && [ -n "$P" ] && [ -n "$D" ]; then
             echo "ready=true" >> "$GITHUB_OUTPUT"
           else
             echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::SAKURA_FTP_HOST / USER / PASS が未設定のためスキップしました（docs/SETUP_GUIDE_C1.html の STEP 10 を参照）"
+            echo "::notice::SAKURA_FTP_HOST / USER / PASS / DIR が未設定のためスキップしました（引き渡し資料 SETUP_GUIDE_C1 の STEP 10 を参照）"
           fi
 
       # ──────────────────────────────────────────────────────────
@@ -114,7 +115,7 @@ jobs:
           #    もし証明書チェーンの都合で strict が通らない場合は、loose に戻したうえで
           #    「いつ・なぜ戻したか」をこのコメントに必ず書き残すこと。
           security: strict
-          server-dir: ${{ env.SERVER_DIR }}
+          server-dir: ${{ secrets.SAKURA_FTP_DIR }}
           local-dir: ./
           dangerous-clean-slate: false
           dry-run: ${{ inputs.dry_run == true }}
